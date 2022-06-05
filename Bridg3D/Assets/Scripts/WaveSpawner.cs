@@ -1,0 +1,138 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Security.Cryptography;
+using UnityEngine;
+
+public class WaveSpawner : MonoBehaviour
+{
+    [System.Serializable]
+    public class Wave
+    {
+        public string name;
+        public Transform[] enemies;
+        public int[] count;
+        public float rate;
+    }
+
+    public Transform[] spawnPoints;
+
+    public Wave[] waves;
+    private int nextWave = 0;
+
+    public float timeBetweenWaves = 5f;
+    public float waveCountdown;
+
+    public WaveDisplay waveDisplay;
+    public EnemyDisplay enemyDisplay;
+
+    private float searchCountdown = 1f;
+
+    public enum SpawnState {SPAWNING, WAITING, COUNTING };
+
+    public SpawnState state = SpawnState.COUNTING;
+
+    void Start()
+    {
+        waveCountdown = timeBetweenWaves;
+    }
+
+    
+    void Update()
+    {
+
+        if (state == SpawnState.WAITING)
+        {
+            if (!enemyIsAlive()) //if no enemies are left, continue
+            {
+                //wave complete, go to next wave, restart counter/states
+                waveCompleted();
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        if (waveCountdown <= 0) //after countdown, begin spawning wave
+        {
+            if(state != SpawnState.SPAWNING)
+            {
+                waveDisplay.setText(nextWave);
+                GameObject.Find("BetweenWavesSong").GetComponent<AudioSource>().enabled = false;
+                GameObject.Find("DuringWavesSong").GetComponent<AudioSource>().enabled = true;
+                StartCoroutine(spawnWave(waves[nextWave])); //spawn wave method
+            }
+        }
+        else
+        {
+            waveCountdown -= Time.deltaTime; //countdown
+        }
+    }
+
+    IEnumerator spawnWave(Wave _wave)
+    {
+        state = SpawnState.SPAWNING;
+
+        for (int i = 0; i < _wave.enemies.Length; i++) //loop thru enemy types
+        {
+            for (int j = 0; j < _wave.count[i]; j++) //loop thru number of each enemy type
+            {
+                spawnEnemy(_wave.enemies[i]); //spawn that number of enemies
+                yield return new WaitForSeconds(1/_wave.rate); //wait before spawning another
+            }
+        }
+
+        state = SpawnState.WAITING;
+
+        yield break;
+    }
+
+    void spawnEnemy(Transform _enemy)
+    {
+        Transform spawnpoint = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length - 1)];
+        Instantiate(_enemy, spawnpoint.position, spawnpoint.rotation);
+        FindObjectOfType<AudioManager>().Play("enemy_spawn");
+        UnityEngine.Debug.Log("spawning enemy"); //spawn enemy
+    }
+
+    bool enemyIsAlive()
+    {
+        searchCountdown -= Time.deltaTime;
+        if (searchCountdown <= 0f) //check every once in a while
+        {
+            searchCountdown = 1f;
+            if (GameObject.FindGameObjectWithTag("Enemy") == null)
+            {
+                    return false; //return false if there are no enemies left
+            }       
+        }
+        enemyDisplay.setText(GameObject.FindGameObjectsWithTag("Enemy").Length);
+        return true; //return true if there are enemies left
+    }
+
+    void waveCompleted()
+    {
+        GameObject.Find("DuringWavesSong").GetComponent<AudioSource>().enabled = false;
+        GameObject.Find("BetweenWavesSong").GetComponent<AudioSource>().enabled = true;
+        waveCountdown = timeBetweenWaves;
+        state = SpawnState.COUNTING;
+        foreach(GameObject obj in GameObject.FindGameObjectsWithTag("DeadEnemy"))
+        {
+            Destroy(obj);
+        }
+        if (nextWave + 1 > waves.Length - 1)
+        {
+            //end game screen with win state
+            FindObjectOfType<AudioManager>().Play("game_over");
+            FindObjectOfType<GameStart>().EndGame(true);
+            this.enabled = false;
+        }
+        else
+        {
+            nextWave++;
+        }
+    }
+
+}
