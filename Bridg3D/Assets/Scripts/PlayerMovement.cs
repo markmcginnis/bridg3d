@@ -6,17 +6,26 @@ public class PlayerMovement : MonoBehaviour
 {
     //movement variables
     [SerializeField]
-    private float horizontalSpeed = 1f;
-    [SerializeField]
-    private float verticalSpeed = 1f;
+    private float mouseSensitivity = 1f;
     [SerializeField]
     private float movementSpeed = 1f;
+    [SerializeField]
+    private float sprintModifier = 1.5f;
+    [SerializeField]
+    private float sprintCapacity = 5f;
     [SerializeField]
     private const float gravity = 9.8f;
     [SerializeField]
     private float jumpHeight = 2f;
-    private float velocity = 0f;
+
+    //variables for use within movement calculations
+    float moveForward;
+    float moveSide;
+    float moveUp;
+    bool isGrounded;
+    float velocity;
     private Rigidbody rb;
+    float sprintTime;
 
     //camera variables
     private float xRotation = 0.0f;
@@ -28,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
     void Start(){
         rb = GetComponent<Rigidbody>();
         cam = Camera.main;
+        sprintTime = sprintCapacity;
     }
  
     void Update()
@@ -45,8 +55,8 @@ public class PlayerMovement : MonoBehaviour
 
 
         //camera axes
-        float mouseX = Input.GetAxis("Mouse X") * horizontalSpeed;
-        float mouseY = Input.GetAxis("Mouse Y") * verticalSpeed;
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
 
         //calculate angles
         yRotation += mouseX;
@@ -56,27 +66,41 @@ public class PlayerMovement : MonoBehaviour
         //rotate camera vertically
         cam.transform.eulerAngles = new Vector3(xRotation, yRotation, 0.0f);
         //rotate body horizontally
-        // transform.eulerAngles = cam.transform.eulerAngles;
         transform.eulerAngles = new Vector3(0f, yRotation, 0f);
 
 
-        // //player axes
-        // float horizontal = Input.GetAxis("Horizontal") * movementSpeed;
-        // float vertical = Input.GetAxis("Vertical") * movementSpeed;
-        // //characterController.Move((Vector3.right * horizontal + Vector3.forward * vertical) * Time.deltaTime);
-        // characterController.Move((cam.transform.right * horizontal + cam.transform.forward * vertical) * Time.deltaTime);
- 
-        // //gravity
-        // if(characterController.isGrounded){
-        //     velocity = 0;
-        //     if(Input.GetButtonDown("Jump")){
-        //         Debug.Log("grounded and trying to jump");
-        //         velocity = Mathf.Sqrt(jumpHeight * -2f * GRAVITY);
-        //     }
-        // }
-        // { //standard movement
-        //     velocity -= GRAVITY * Time.deltaTime;
-        //     characterController.Move(new Vector3(0, velocity, 0));
-        // }
+
+        //player movement
+        if(Input.GetAxis("Sprint") > 0){
+            sprintTime = Mathf.Clamp(sprintTime - Time.deltaTime, 0, sprintCapacity);
+            if(sprintTime > 0){
+                velocity = movementSpeed * sprintModifier;
+            }
+            else{
+                velocity = movementSpeed;
+            }
+        }
+        else{
+            sprintTime = Mathf.Clamp(sprintTime + Time.deltaTime, 0, sprintCapacity);
+            velocity = movementSpeed;
+        }
+
+        moveForward = Input.GetAxis("Vertical") * velocity;
+        moveSide = Input.GetAxis("Horizontal") * velocity;
+        moveUp = Input.GetAxis("Jump") * jumpHeight;
+    }
+
+    private void FixedUpdate() {
+        rb.velocity = (transform.forward * moveForward) + (transform.right * moveSide) + (transform.up * rb.velocity.y);
+        if(isGrounded && moveUp != 0){
+            rb.AddForce(transform.up * moveUp, ForceMode.VelocityChange);
+            isGrounded = false;
+        }
+    }
+
+    private void OnCollisionEnter(Collision other) {
+        if(other.gameObject.tag == "Ground"){
+            isGrounded = true;
+        }
     }
 }
