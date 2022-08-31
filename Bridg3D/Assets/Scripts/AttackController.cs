@@ -20,6 +20,7 @@ public class AttackController : MonoBehaviour
     void Update()
     {
         if(Input.GetButtonDown("Fire1")){
+            //might add delay to actually taking damage so axe swing lines up with potential deaths
             Debug.Log("attack initiated");
             Collider[] colliders = Physics.OverlapSphere(attackPoint.position, attackRadius, targetLayer, QueryTriggerInteraction.Ignore);
             Debug.Log(colliders.Length);
