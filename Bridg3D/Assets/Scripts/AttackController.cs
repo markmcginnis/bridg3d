@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AttackController : MonoBehaviour
 {
+    public float damage = 10f;
+
     public Transform attackPoint;
     public float attackRadius = 3f;
     public LayerMask targetLayer;
@@ -21,6 +23,9 @@ public class AttackController : MonoBehaviour
             Debug.Log("attack initiated");
             Collider[] colliders = Physics.OverlapSphere(attackPoint.position, attackRadius, targetLayer, QueryTriggerInteraction.Ignore);
             Debug.Log(colliders.Length);
+            foreach(Collider coll in colliders){
+                coll.GetComponent<HealthController>().TakeDamage(damage);
+            }
         }
     }
 }
