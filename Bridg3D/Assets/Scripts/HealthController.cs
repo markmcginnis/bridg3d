@@ -32,6 +32,8 @@ public class HealthController : MonoBehaviour
 
     void Die(){
         Debug.Log("DEAD");
+        gameObject.SetActive(false);
         //may need to move to be player/enemy specific
+        //^^ maybe just have additional specific PlayerHealthController inherit from HealthController
     }
 }

@@ -10,6 +10,8 @@ public class AttackController : MonoBehaviour
     public float attackRadius = 3f;
     public LayerMask targetLayer;
 
+    public Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +24,12 @@ public class AttackController : MonoBehaviour
         if(Input.GetButtonDown("Fire1")){
             //might add delay to actually taking damage so axe swing lines up with potential deaths
             Debug.Log("attack initiated");
+            //currently this works by just playing the animation then it can't play again,
+            //it would be better to link this to attack cooldown timer tho
+            animator.Play("WepPlaceholder_Attack",0);
+            // if(!animator.GetNextAnimatorStateInfo(0).IsName("WepPlaceholder_Attack") || !animator.GetCurrentAnimatorStateInfo(0).IsName("WepPlaceholder_Attack")){
+            //     animator.SetTrigger("Attack");
+            // }
             Collider[] colliders = Physics.OverlapSphere(attackPoint.position, attackRadius, targetLayer, QueryTriggerInteraction.Ignore);
             Debug.Log(colliders.Length);
             foreach(Collider coll in colliders){
