@@ -10,7 +10,7 @@ public class AttackController : MonoBehaviour
     public float attackRadius = 3f;
     public LayerMask targetLayer;
 
-    public Animator animator;
+    public Animator wepAnimator;
 
     // Start is called before the first frame update
     void Start()
@@ -21,12 +21,20 @@ public class AttackController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //for enemy reuse, maybe make getting input a virtual function and have an
+        //EnemyAttackController that inherits from this that gets its input from the
+        //main EnemyController and the PlayerAttackController just gets its input
+        //the same way but in the virtual function to make porting over easier
+        //why write the almost same code twice?
         if(Input.GetButtonDown("Fire1")){
+            DefendController defController = GetComponent<DefendController>();
+            if(defController != null && defController.shieldAnimator.GetBool("Defend"))
+                return;
             //might add delay to actually taking damage so axe swing lines up with potential deaths
             Debug.Log("attack initiated");
             //currently this works by just playing the animation then it can't play again,
             //it would be better to link this to attack cooldown timer tho
-            animator.Play("WepPlaceholder_Attack",0);
+            wepAnimator.Play("WepPlaceholder_Attack",0);
             // if(!animator.GetNextAnimatorStateInfo(0).IsName("WepPlaceholder_Attack") || !animator.GetCurrentAnimatorStateInfo(0).IsName("WepPlaceholder_Attack")){
             //     animator.SetTrigger("Attack");
             // }
