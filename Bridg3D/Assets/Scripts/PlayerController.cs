@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(AttackController))]
 [RequireComponent(typeof(DefendController))]
 [RequireComponent(typeof(HealthController))]
-public class PlayerAttackController : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     AttackController attackController;
     DefendController defendController;
@@ -29,6 +29,5 @@ public class PlayerAttackController : MonoBehaviour
         if(Input.GetButtonDown("Fire1")){
             attackController.Attack();
         }
-        
     }
 }

@@ -14,12 +14,6 @@ public class HealthController : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void TakeDamage(float damage){
         currentHealth -= damage * damageModifier;
         if(currentHealth <= 0){
@@ -31,10 +25,7 @@ public class HealthController : MonoBehaviour
         currentHealth = Mathf.Clamp(currentHealth + amount, currentHealth, maxHealth);
     }
 
-    void Die(){
+    virtual public void Die(){
         Debug.Log("DEAD");
-        gameObject.SetActive(false);
-        //may need to move to be player/enemy specific
-        //^^ maybe just have additional specific PlayerHealthController inherit from HealthController
     }
 }
