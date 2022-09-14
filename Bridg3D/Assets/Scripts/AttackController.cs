@@ -12,22 +12,8 @@ public class AttackController : MonoBehaviour
 
     public Animator wepAnimator;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //for enemy reuse, maybe make getting input a virtual function and have an
-        //EnemyAttackController that inherits from this that gets its input from the
-        //main EnemyController and the PlayerAttackController just gets its input
-        //the same way but in the virtual function to make porting over easier
-        //why write the almost same code twice?
-        if(Input.GetButtonDown("Fire1")){
-            DefendController defController = GetComponent<DefendController>();
+    public void Attack(){
+        DefendController defController = GetComponent<DefendController>();
             if(defController != null && defController.shieldAnimator.GetBool("Defend"))
                 return;
             //might add delay to actually taking damage so axe swing lines up with potential deaths
@@ -43,6 +29,5 @@ public class AttackController : MonoBehaviour
             foreach(Collider coll in colliders){
                 coll.GetComponent<HealthController>().TakeDamage(damage);
             }
-        }
     }
 }
