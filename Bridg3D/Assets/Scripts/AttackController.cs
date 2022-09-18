@@ -32,7 +32,7 @@ public class AttackController : MonoBehaviour
         if(defController != null && defController.shieldAnimator.GetBool("Defend"))
             return;
         //might add delay to actually taking damage so axe swing lines up with potential deaths
-        Debug.Log("attack initiated");
+        //Debug.Log("attack initiated");
         //currently this works by just playing the animation then it can't play again,
         //it would be better to link this to attack cooldown timer tho
         wepAnimator.Play("WepPlaceholder_Attack",0);
@@ -40,8 +40,9 @@ public class AttackController : MonoBehaviour
         //     animator.SetTrigger("Attack");
         // }
         Collider[] colliders = Physics.OverlapSphere(attackPoint.position, attackRadius, targetLayer, QueryTriggerInteraction.Ignore);
-        Debug.Log(colliders.Length);
+        //Debug.Log(colliders.Length);
         foreach(Collider coll in colliders){
+            //Debug.Log(coll.gameObject.name);
             coll.GetComponent<HealthController>().TakeDamage(damage);
         }
     }
