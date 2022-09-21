@@ -6,6 +6,7 @@ public class AttackController : MonoBehaviour
 {
     public float damage = 10f;
 
+    public float knockbackForce = 5f;
     public Transform attackPoint;
     public float attackRadius = 3f;
     public LayerMask targetLayer;
@@ -44,6 +45,7 @@ public class AttackController : MonoBehaviour
         foreach(Collider coll in colliders){
             //Debug.Log(coll.gameObject.name);
             coll.GetComponent<HealthController>().TakeDamage(damage);
+            coll.GetComponent<KnockbackController>().AddKnockback(transform.forward, knockbackForce);
         }
     }
 }
