@@ -25,6 +25,9 @@ public class EnemyController : MonoBehaviour
 
     Vector3 velocity;
 
+    float attackRange;
+
+
     AttackController attackController;
     DefendController defendController;
     HealthController healthController;
@@ -38,6 +41,7 @@ public class EnemyController : MonoBehaviour
         healthController = GetComponent<HealthController>();
         controller = GetComponent<CharacterController>();
         initialRotation = Quaternion.Euler(new Vector3(transform.localRotation.eulerAngles.x, transform.localRotation.eulerAngles.y, transform.localRotation.eulerAngles.z));
+        attackRange = attackController.attackRadius;
     }
 
     // Update is called once per frame 
@@ -48,8 +52,8 @@ public class EnemyController : MonoBehaviour
         if(distance.magnitude > followDistance)
             Move();
         //logic for attacking
-        if(attackController != null){
-            //attackController.Attack();
+        if((target.position - transform.position).magnitude < attackRange){
+            attackController.Attack();
         }
         //logic for defending
         if(defendController != null){

@@ -45,7 +45,9 @@ public class AttackController : MonoBehaviour
         foreach(Collider coll in colliders){
             //Debug.Log(coll.gameObject.name);
             coll.GetComponent<HealthController>().TakeDamage(damage);
-            coll.GetComponent<KnockbackController>().AddKnockback(transform.forward, knockbackForce);
+            KnockbackController knockbackController = coll.GetComponent<KnockbackController>();
+            if(knockbackController)
+                knockbackController.AddKnockback(transform.forward, knockbackForce);
         }
     }
 }
