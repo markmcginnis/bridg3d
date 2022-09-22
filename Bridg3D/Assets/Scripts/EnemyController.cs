@@ -25,6 +25,8 @@ public class EnemyController : MonoBehaviour
 
     Vector3 velocity;
 
+    public int coinValue = 1;
+
     float attackRange;
 
 

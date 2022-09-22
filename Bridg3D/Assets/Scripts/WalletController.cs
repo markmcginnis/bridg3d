@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class WalletController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    int balance = 0;
+
+    public void IncreaseBalance(int value){
+        balance += value;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void DecreaseBalance(int value){
+        balance -= value;
+    }
+
+    public int GetBalance(){
+        return balance;
+    }
+
+    public bool CanAfford(int value){
+        return value >= balance;
     }
 }
