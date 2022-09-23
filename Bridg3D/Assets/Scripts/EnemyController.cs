@@ -29,6 +29,10 @@ public class EnemyController : MonoBehaviour
 
     float attackRange;
 
+    public float strategyLevel = 5f;
+    float currHealth;
+    float shieldTime;
+
 
     AttackController attackController;
     DefendController defendController;
@@ -44,11 +48,13 @@ public class EnemyController : MonoBehaviour
         controller = GetComponent<CharacterController>();
         initialRotation = Quaternion.Euler(new Vector3(transform.localRotation.eulerAngles.x, transform.localRotation.eulerAngles.y, transform.localRotation.eulerAngles.z));
         attackRange = attackController.attackRadius;
+        currHealth = healthController.currentHealth;
     }
 
     // Update is called once per frame 
     void Update()
     {
+        shieldTime = Mathf.Clamp(shieldTime - Time.deltaTime, -1, strategyLevel);
         Look();
         Vector3 distance = target.position - transform.position;
         if(distance.magnitude > followDistance)
@@ -59,9 +65,15 @@ public class EnemyController : MonoBehaviour
         }
         //logic for defending
         if(defendController != null){
-            //defendController.ShieldUp();
-            //defendController.ShieldDown();
+            if(currHealth > healthController.currentHealth){
+                defendController.ShieldUp();
+                shieldTime = Random.Range(strategyLevel/3f, strategyLevel);
+            }
+            if(shieldTime < 0 && defendController.IsShieldUp()){
+                defendController.ShieldDown();
+            }
         }
+        currHealth = healthController.currentHealth;
     }
 
     void Look(){

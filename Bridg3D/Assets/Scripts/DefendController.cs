@@ -24,7 +24,6 @@ public class DefendController : MonoBehaviour
     }
 
     public void ShieldUp(){
-        Debug.Log("shield up");
         if(shieldTime > 0)
             return;
         shieldAnimator.SetBool("Defend", true);
@@ -34,12 +33,15 @@ public class DefendController : MonoBehaviour
     }
 
     public void ShieldDown(){
-        Debug.Log("shield down");
         if(shieldAnimator.GetBool("Defend"))
             shieldTime = shieldCooldown;
         shieldAnimator.SetBool("Defend", false);
         if(healthController != null){
             healthController.damageModifier = 1f;
         }
+    }
+
+    public bool IsShieldUp(){
+        return shieldAnimator.GetBool("Defend");
     }
 }

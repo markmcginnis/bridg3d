@@ -11,7 +11,6 @@ public class EnemyHealthController : HealthController
     public override void Die()
     {
         base.Die();
-        Debug.Log("ENEMY DEAD");
         coin.value = GetComponent<EnemyController>().coinValue;
         Instantiate(coin.gameObject, coinSpawnpoint.position, coinSpawnpoint.rotation);
         GameObject.Destroy(gameObject);

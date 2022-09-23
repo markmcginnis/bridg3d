@@ -11,9 +11,7 @@ public class Coin : MonoBehaviour
         WalletController walletController = other.GetComponent<WalletController>();
         if(!walletController)
             return;
-        Debug.Log("balance before: " + walletController.GetBalance());
         walletController.IncreaseBalance(value);
-        Debug.Log("balance after: " + walletController.GetBalance());
         GameObject.Destroy(gameObject);
     }
 }

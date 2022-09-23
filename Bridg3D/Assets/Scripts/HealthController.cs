@@ -26,6 +26,6 @@ public class HealthController : MonoBehaviour
     }
 
     virtual public void Die(){
-        Debug.Log("DEAD");
+        Debug.Log(gameObject.name + " DEAD");
     }
 }
