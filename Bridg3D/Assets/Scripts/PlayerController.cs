@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     AttackController attackController;
     DefendController defendController;
     HealthController healthController;
+    [SerializeField]
+    MarketController marketController;
 
     void Start(){
         attackController = GetComponent<AttackController>();
@@ -28,6 +30,14 @@ public class PlayerController : MonoBehaviour
         }
         if(Input.GetButtonDown("Fire1")){
             attackController.Attack();
+        }
+        if(Input.GetButtonDown("BuyHealth")){
+            marketController.BuyHealth();
+        }
+        //only for testing purposes this should be removed later
+        if(Input.GetButtonDown("BuyUpgrade")){
+            marketController.BuyUpgrade("TestUpgrade");
+            marketController.BuyUpgrade("None");
         }
     }
 }
