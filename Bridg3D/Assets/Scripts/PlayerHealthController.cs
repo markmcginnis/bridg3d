@@ -6,6 +6,7 @@ public class PlayerHealthController : HealthController
 {
     public override void Die()
     {
+        //disable components to see outcome
         base.Die();
         GetComponent<AttackController>().enabled = false;
         GetComponent<HealthController>().enabled = false;
@@ -13,5 +14,6 @@ public class PlayerHealthController : HealthController
         GetComponent<FPSMovement>().enabled = false;
         GetComponent<PlayerController>().enabled = false;
         GetComponentInChildren<MouseLook>().enabled = false;
+        //may need to add more like quick timer than go to lose menu or whatever else
     }
 }

@@ -2,49 +2,46 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackController : MonoBehaviour
+public class AttackController : CustomComponent
 {
     public float damage = 10f;
-
     public float knockbackForce = 5f;
     public Transform attackPoint;
     public float attackRadius = 3f;
     public LayerMask targetLayer;
-
     public Animator wepAnimator;
-
     public float attackCooldown = 1.5f;
-
     float attackTime;
 
     void Start(){
+        //start with being able to attack
         attackTime = 0;
     }
 
     void Update(){
+        //over time make sure the cooldown actually cools down
         attackTime = Mathf.Clamp(attackTime - Time.deltaTime, -0.1f, attackCooldown);
     }
 
     public void Attack(){
+        //check if cooldown is over yet or not
         if(attackTime > 0)
             return;
+        //reset cooldown
         attackTime = attackCooldown;
+        //see if we have a shield and if we do don't attack if shield is up
         DefendController defController = GetComponent<DefendController>();
         if(defController != null && defController.shieldAnimator.GetBool("Defend"))
             return;
-        //might add delay to actually taking damage so axe swing lines up with potential deaths
-        //Debug.Log("attack initiated");
-        //currently this works by just playing the animation then it can't play again,
-        //it would be better to link this to attack cooldown timer tho
+        //this may need to change strings
         wepAnimator.Play("WepPlaceholder_Attack",0);
-        // if(!animator.GetNextAnimatorStateInfo(0).IsName("WepPlaceholder_Attack") || !animator.GetCurrentAnimatorStateInfo(0).IsName("WepPlaceholder_Attack")){
-        //     animator.SetTrigger("Attack");
-        // }
+        //may add delay to actual taking of damage to match up with animation
         Collider[] colliders = Physics.OverlapSphere(attackPoint.position, attackRadius, targetLayer, QueryTriggerInteraction.Ignore);
-        //Debug.Log(colliders.Length);
         foreach(Collider coll in colliders){
-            //Debug.Log(coll.gameObject.name);
+            //player/enemy def have healthcontroller, this won't be null based on layermask selected
             coll.GetComponent<HealthController>().TakeDamage(damage);
+            //this could probably have the null check removed but for now its here
+            //apply knockback correctly
             KnockbackController knockbackController = coll.GetComponent<KnockbackController>();
             if(knockbackController)
                 knockbackController.AddKnockback(transform.forward, knockbackForce);

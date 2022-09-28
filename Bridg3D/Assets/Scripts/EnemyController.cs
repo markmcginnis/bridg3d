@@ -25,7 +25,7 @@ public class EnemyController : MonoBehaviour
 
     Vector3 velocity;
 
-    public int coinValue = 1;
+    public float coinValue = 1;
 
     float attackRange;
 
@@ -54,8 +54,10 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame 
     void Update()
     {
+        //keep shield up for certain amount of time
         shieldTime = Mathf.Clamp(shieldTime - Time.deltaTime, -1, strategyLevel);
         Look();
+        //move up to certain distance
         Vector3 distance = target.position - transform.position;
         if(distance.magnitude > followDistance)
             Move();
@@ -77,6 +79,7 @@ public class EnemyController : MonoBehaviour
     }
 
     void Look(){
+        //face player but don't look up
         Quaternion lookRotation = Quaternion.LookRotation(target.position - transform.position, Vector3.up);
         lookRotation.eulerAngles = new Vector3(0, lookRotation.eulerAngles.y, 0);
         transform.rotation = lookRotation;

@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(HealthController))]
-public class DefendController : MonoBehaviour
+//inherent dynamic upgrading ability
+public class DefendController : CustomComponent
 {
     public Animator shieldAnimator;
     [Range(0f,1f)]
     public float shieldStrength = 1f;
     public float shieldCooldown = 2.5f;
-
     float shieldTime;
-
     HealthController healthController;
 
     void Start() {
@@ -20,28 +19,31 @@ public class DefendController : MonoBehaviour
     }
 
     void Update() {
+        //monitor shield cooldown
         shieldTime = Mathf.Clamp(shieldTime - Time.deltaTime, -0.1f, shieldCooldown);
     }
 
     public void ShieldUp(){
+        //make sure cooldown has cooled down
         if(shieldTime > 0)
             return;
         shieldAnimator.SetBool("Defend", true);
-        if(healthController != null){
-            healthController.damageModifier = 1f - shieldStrength;
-        }
+        //modify taking of damage to inverse of strength
+        healthController.damageModifier = 1f - shieldStrength;
     }
 
     public void ShieldDown(){
+        //if currently defending, reset cooldown
         if(shieldAnimator.GetBool("Defend"))
             shieldTime = shieldCooldown;
+        //stop defending
         shieldAnimator.SetBool("Defend", false);
-        if(healthController != null){
-            healthController.damageModifier = 1f;
-        }
+        //reset taking of damage
+        healthController.damageModifier = 1f;
     }
 
     public bool IsShieldUp(){
+        //simple thing for others to use
         return shieldAnimator.GetBool("Defend");
     }
 }

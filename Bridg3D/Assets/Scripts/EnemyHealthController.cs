@@ -10,6 +10,7 @@ public class EnemyHealthController : HealthController
     Transform coinSpawnpoint;
     public override void Die()
     {
+        //do the normal die stuff, then spawn a coin with a given value
         base.Die();
         coin.value = GetComponent<EnemyController>().coinValue;
         Instantiate(coin.gameObject, coinSpawnpoint.position, coinSpawnpoint.rotation);

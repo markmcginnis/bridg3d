@@ -4,21 +4,22 @@ using UnityEngine;
 
 public class WalletController : MonoBehaviour
 {
-    int balance = 0;
+    [SerializeField]
+    float balance = 0;
 
-    public void IncreaseBalance(int value){
+    public void IncreaseBalance(float value){
         balance += value;
     }
 
-    public void DecreaseBalance(int value){
+    public void DecreaseBalance(float value){
         balance -= value;
     }
 
-    public int GetBalance(){
+    public float GetBalance(){
         return balance;
     }
 
-    public bool CanAfford(int value){
-        return value >= balance;
+    public bool CanAfford(float value){
+        return value <= balance;
     }
 }
