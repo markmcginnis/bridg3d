@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     MarketController marketController;
 
+    public bool acceptCombatInput = true;
+
     void Start(){
         attackController = GetComponent<AttackController>();
         defendController = GetComponent<DefendController>();
@@ -22,22 +24,25 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetButtonDown("Fire2")){
-            defendController.ShieldUp();
-        }
-        if(Input.GetButtonUp("Fire2")){
-            defendController.ShieldDown();
-        }
-        if(Input.GetButtonDown("Fire1")){
-            attackController.Attack();
+        if(acceptCombatInput){
+            if(Input.GetButtonDown("Fire2")){
+                defendController.ShieldUp();
+            }
+            if(Input.GetButtonUp("Fire2")){
+                defendController.ShieldDown();
+            }
+            if(Input.GetButtonDown("Fire1")){
+                attackController.Attack();
+            }
         }
         if(Input.GetButtonDown("BuyHealth")){
             marketController.BuyHealth();
         }
-        //only for testing purposes this should be removed later
-        if(Input.GetButtonDown("BuyUpgrade")){
-            marketController.BuyUpgrade("TestUpgrade");
-            marketController.BuyUpgrade("None");
+        if((Input.GetButtonDown("Cancel") || Input.GetButtonDown("BuyUpgrade")) && marketController.upgradeMenuOpen){
+            marketController.CloseUpgradeMenu();
+        }
+        else if(Input.GetButtonDown("BuyUpgrade") && !marketController.upgradeMenuOpen){
+            marketController.OpenUpgradeMenu();
         }
     }
 }

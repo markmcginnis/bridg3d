@@ -14,11 +14,17 @@ public class MarketController : MonoBehaviour
         public float impact;
         public enum MathOperation {PLUS, MULTIPLY};
         public MathOperation mathOperation;
+        public string description;
     }
 
-    public Upgrade[] upgrades;
+    public GameObject upgradeMenuContainer;
+    public UpgradeMenu upgradeMenu;
+    public bool upgradeMenuOpen = false;
 
-    bool inArea = false;
+    //public Upgrade[] upgrades;
+    public List<Upgrade> upgrades;
+
+    public bool inArea = false;
     [SerializeField]
     GameObject player;
 
@@ -62,6 +68,9 @@ public class MarketController : MonoBehaviour
         else{
             controller[upgrade.property] = (float)controller[upgrade.property] * upgrade.impact;
         }
+        upgrades.Remove(upgrade);
+        upgradeMenu.ResetMenu();
+        upgradeMenu.UpdateMenu();
     }
 
     public void BuyHealth(){
@@ -80,14 +89,47 @@ public class MarketController : MonoBehaviour
         playerHealth.Heal(healthAmount);
     }
 
+    public void OpenUpgradeMenu(){
+        if(!inArea)
+            return;
+        upgradeMenuOpen = true;
+        upgradeMenuContainer.SetActive(true);
+        player.GetComponentInChildren<MouseLook>().enabled = false;
+        player.GetComponent<PlayerController>().acceptCombatInput = false;
+        player.GetComponent<FPSMovement>().enabled = false;
+        upgradeMenu.UpdateMenu();
+        Cursor.lockState = CursorLockMode.None;
+    }
+
+    public void CloseUpgradeMenu(){
+        if(!inArea)
+            return;
+        upgradeMenuOpen = false;
+        upgradeMenuContainer.SetActive(false);
+        player.GetComponentInChildren<MouseLook>().enabled = true;
+        player.GetComponent<PlayerController>().acceptCombatInput = true;
+        player.GetComponent<FPSMovement>().enabled = true;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
     //keep track of player being in range to buy stuff
     void OnTriggerEnter(Collider other)
     {
-        inArea = true;
+        if(other.gameObject.Equals(player))
+            inArea = true;
     }
 
     void OnTriggerExit(Collider other)
     {
-        inArea = false;
+        if(other.gameObject.Equals(player)){
+            inArea = false;
+            upgradeMenuOpen = false;
+            upgradeMenuContainer.SetActive(false);
+            player.GetComponentInChildren<MouseLook>().enabled = true;
+            player.GetComponent<PlayerController>().acceptCombatInput = true;
+            player.GetComponent<FPSMovement>().enabled = true;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+            
     }
 }
