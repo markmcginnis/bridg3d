@@ -22,7 +22,10 @@ public class FPSMovement : MonoBehaviour
 
     Vector3 velocity;
 
+    InputManager input;
+
     void Start(){
+        input = GameObject.FindObjectOfType<InputManager>();
         sprintTime = sprintCapacity;
     }
 
@@ -38,8 +41,8 @@ public class FPSMovement : MonoBehaviour
         }
 
         //get key axes inputs
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
+        float x = input.GetAxis("Horizontal");
+        float z = input.GetAxis("Vertical");
 
         //move according to local rotation versus global position
         Vector3 move = transform.right * x + transform.forward * z;
@@ -48,7 +51,7 @@ public class FPSMovement : MonoBehaviour
         float speedModifier = 1f;
 
         //if trying to sprint
-        if(Input.GetAxis("Sprint") > 0){
+        if(Input.GetButtonDown("Sprint")){
             //make sure time is not negative and adjust as needed
             sprintTime = Mathf.Clamp(sprintTime - Time.deltaTime, 0, sprintCapacity);
             //if we have sprint time left
@@ -67,7 +70,7 @@ public class FPSMovement : MonoBehaviour
         controller.Move(move * speed * Time.deltaTime * speedModifier);
 
         //if jump button hit and currently on ground
-        if(Input.GetButtonDown("Jump") && isGrounded){
+        if(input.GetButtonDown("Jump") && isGrounded){
             //using physics to jump up specific height
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
