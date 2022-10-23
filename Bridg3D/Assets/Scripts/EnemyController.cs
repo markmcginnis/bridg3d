@@ -8,6 +8,8 @@ public class EnemyController : MonoBehaviour
 {
     [SerializeField]
     string targetTag;
+    [SerializeField]
+    string secondaryTargetTag;
     Transform target;
 
     Quaternion initialRotation;
@@ -54,6 +56,8 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame 
     void Update()
     {
+        if(!GameObject.FindGameObjectWithTag(targetTag))
+            target = GameObject.FindGameObjectWithTag(secondaryTargetTag).GetComponent<Transform>();;
         //keep shield up for certain amount of time
         shieldTime = Mathf.Clamp(shieldTime - Time.deltaTime, -1, strategyLevel);
         Look();
