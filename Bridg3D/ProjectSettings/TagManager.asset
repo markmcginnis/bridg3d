@@ -7,6 +7,10 @@ TagManager:
   - Ground
   - Market
   - Enemy
+  - PlayerSkull
+  - PlayerHealthBar
+  - PlayerHeart
+  - DeadEnemy
   layers:
   - Default
   - TransparentFX

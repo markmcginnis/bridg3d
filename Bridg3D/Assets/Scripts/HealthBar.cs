@@ -8,14 +8,19 @@ public class HealthBar : MonoBehaviour
 
     public Slider slider;
 
-    public void setHealth(int health)
+    public void setHealth(float health)
     {
         slider.value = health;
     }
 
-    public void setMaxHealth(int maxHealth)
+    public void setMaxHealth(float maxHealth)
     {
         slider.maxValue = maxHealth;
         setHealth(maxHealth);
+    }
+
+    public void Die(){
+        this.transform.Find("Heart").gameObject.SetActive(false);
+        this.transform.Find("Skull").gameObject.SetActive(true);
     }
 }

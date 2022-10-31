@@ -16,13 +16,10 @@ public class WaveSpawner : MonoBehaviour
     public Transform[] spawnPoints;
 
     public Wave[] waves;
-    private int nextWave = 0;
+    public int nextWave = 0;
 
     public float timeBetweenWaves = 5f;
     public float waveCountdown;
-
-    // public WaveDisplay waveDisplay;
-    // public EnemyDisplay enemyDisplay;
 
     private float searchCountdown = 1f;
 
@@ -56,7 +53,6 @@ public class WaveSpawner : MonoBehaviour
         {
             if(state != SpawnState.SPAWNING)
             {
-                // waveDisplay.setText(nextWave);
                 // GameObject.Find("BetweenWavesSong").GetComponent<AudioSource>().enabled = false;
                 // GameObject.Find("DuringWavesSong").GetComponent<AudioSource>().enabled = true;
                 StartCoroutine(spawnWave(waves[nextWave])); //spawn wave method
@@ -105,7 +101,6 @@ public class WaveSpawner : MonoBehaviour
                     return false; //return false if there are no enemies left
             }       
         }
-        // enemyDisplay.setText(GameObject.FindGameObjectsWithTag("Enemy").Length);
         return true; //return true if there are enemies left
     }
 
