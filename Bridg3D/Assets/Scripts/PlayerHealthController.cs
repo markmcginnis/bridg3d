@@ -8,6 +8,7 @@ public class PlayerHealthController : HealthController
     {
         //disable components to see outcome
         base.Die();
+        currentHealth = 0;
         GetComponent<AttackController>().enabled = false;
         GetComponent<HealthController>().enabled = false;
         GetComponent<DefendController>().enabled = false;

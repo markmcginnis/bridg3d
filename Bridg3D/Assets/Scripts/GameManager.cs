@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     WaveSpawner waveSpawner;
     AudioManager audioManager;
+    MenuManager menuManager;
 
     public TMP_Text waveText;
     public TMP_Text enemyCountText;
@@ -20,11 +22,16 @@ public class GameManager : MonoBehaviour
 
     public WalletController wallet;
 
+    public PlayerController playerController;
+    
+    public float returnToMenuTime = 3f;
+
     // Start is called before the first frame update
     void Start()
     {
         waveSpawner = GetComponent<WaveSpawner>();
         audioManager = GetComponent<AudioManager>();
+        menuManager = GetComponent<MenuManager>();
         playerHealthBar.setMaxHealth(playerHealthController.maxHealth);
         marketHealthBar.setMaxHealth(marketHealthController.maxHealth);
     }
@@ -34,8 +41,20 @@ public class GameManager : MonoBehaviour
     {
         playerHealthBar.setHealth(playerHealthController.currentHealth);
         marketHealthBar.setHealth(marketHealthController.currentHealth);
-        if(playerHealthController.currentHealth <= 0)
+        if(playerHealthController.currentHealth <= 0){
             playerHealthBar.Die();
+            returnToMenuTime -= Time.deltaTime;
+            if(returnToMenuTime <= 0){
+                Cursor.lockState = CursorLockMode.Confined;
+                ReturnToMainMenu();
+            }
+        }
+        if(playerController.pauseMenuOpen){
+            Pause();
+        }
+        else{
+            Resume();
+        }
         if(marketHealthController.currentHealth <= 0)
             marketHealthBar.Die();
         UpdateWaveText(waveSpawner.nextWave+1);
@@ -53,5 +72,19 @@ public class GameManager : MonoBehaviour
 
     void UpdateWalletText(float balance){
         walletText.text = "Coins: " + ((int)balance).ToString();
+    }
+
+    public void ReturnToMainMenu(){
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void Resume(){
+        playerController.pauseMenuOpen = false;
+        menuManager.Resume();
+    }
+
+    public void Pause(){
+        playerController.pauseMenuOpen = true;
+        menuManager.Pause();
     }
 }

@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
 
     public bool acceptCombatInput = true;
     public bool acceptOtherInput = true;
+    public bool pauseMenuOpen = false;
 
     void Start(){
         input = GameObject.FindObjectOfType<InputManager>();
@@ -54,6 +55,9 @@ public class PlayerController : MonoBehaviour
         }
         else if(input.GetButtonDown("Open Keybind Menu") && !input.keybindMenuOpen && !marketController.upgradeMenuOpen){
             input.OpenKeybindMenu();
+        }
+        if(input.GetButtonDown("Cancel") && !(input.keybindMenuOpen || marketController.upgradeMenuOpen)){
+            pauseMenuOpen = !pauseMenuOpen;
         }
     }
 }
