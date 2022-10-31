@@ -1,8 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Security.Cryptography;
 using UnityEngine;
 
 public class WaveSpawner : MonoBehaviour
@@ -19,13 +16,10 @@ public class WaveSpawner : MonoBehaviour
     public Transform[] spawnPoints;
 
     public Wave[] waves;
-    private int nextWave = 0;
+    public int nextWave = 0;
 
     public float timeBetweenWaves = 5f;
     public float waveCountdown;
-
-    public WaveDisplay waveDisplay;
-    public EnemyDisplay enemyDisplay;
 
     private float searchCountdown = 1f;
 
@@ -59,9 +53,8 @@ public class WaveSpawner : MonoBehaviour
         {
             if(state != SpawnState.SPAWNING)
             {
-                waveDisplay.setText(nextWave);
-                GameObject.Find("BetweenWavesSong").GetComponent<AudioSource>().enabled = false;
-                GameObject.Find("DuringWavesSong").GetComponent<AudioSource>().enabled = true;
+                // GameObject.Find("BetweenWavesSong").GetComponent<AudioSource>().enabled = false;
+                // GameObject.Find("DuringWavesSong").GetComponent<AudioSource>().enabled = true;
                 StartCoroutine(spawnWave(waves[nextWave])); //spawn wave method
             }
         }
@@ -93,8 +86,8 @@ public class WaveSpawner : MonoBehaviour
     {
         Transform spawnpoint = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length - 1)];
         Instantiate(_enemy, spawnpoint.position, spawnpoint.rotation);
-        FindObjectOfType<AudioManager>().Play("enemy_spawn");
-        UnityEngine.Debug.Log("spawning enemy"); //spawn enemy
+        // FindObjectOfType<AudioManager>().Play("enemy_spawn");
+        // UnityEngine.Debug.Log("spawning enemy"); //spawn enemy
     }
 
     bool enemyIsAlive()
@@ -108,25 +101,24 @@ public class WaveSpawner : MonoBehaviour
                     return false; //return false if there are no enemies left
             }       
         }
-        enemyDisplay.setText(GameObject.FindGameObjectsWithTag("Enemy").Length);
         return true; //return true if there are enemies left
     }
 
     void waveCompleted()
     {
-        GameObject.Find("DuringWavesSong").GetComponent<AudioSource>().enabled = false;
-        GameObject.Find("BetweenWavesSong").GetComponent<AudioSource>().enabled = true;
+        // GameObject.Find("DuringWavesSong").GetComponent<AudioSource>().enabled = false;
+        // GameObject.Find("BetweenWavesSong").GetComponent<AudioSource>().enabled = true;
         waveCountdown = timeBetweenWaves;
         state = SpawnState.COUNTING;
-        foreach(GameObject obj in GameObject.FindGameObjectsWithTag("DeadEnemy"))
-        {
-            Destroy(obj);
-        }
+        // foreach(GameObject obj in GameObject.FindGameObjectsWithTag("DeadEnemy"))
+        // {
+        //     Destroy(obj);
+        // }
         if (nextWave + 1 > waves.Length - 1)
         {
             //end game screen with win state
-            FindObjectOfType<AudioManager>().Play("game_over");
-            FindObjectOfType<GameStart>().EndGame(true);
+            // FindObjectOfType<AudioManager>().Play("game_over");
+            // FindObjectOfType<GameStart>().EndGame(true);
             this.enabled = false;
         }
         else

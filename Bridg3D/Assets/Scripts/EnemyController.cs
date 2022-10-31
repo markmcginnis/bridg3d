@@ -8,6 +8,8 @@ public class EnemyController : MonoBehaviour
 {
     [SerializeField]
     string targetTag;
+    [SerializeField]
+    string secondaryTargetTag;
     Transform target;
 
     Quaternion initialRotation;
@@ -41,7 +43,11 @@ public class EnemyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        target = GameObject.FindGameObjectWithTag(targetTag).GetComponent<Transform>();
+        GameObject searchTarget = GameObject.FindGameObjectWithTag(targetTag);
+        if(!searchTarget){
+            searchTarget = GameObject.FindGameObjectWithTag(secondaryTargetTag);
+        }
+        target = searchTarget.GetComponent<Transform>();
         attackController = GetComponent<AttackController>();
         defendController = GetComponent<DefendController>();
         healthController = GetComponent<HealthController>();
@@ -54,6 +60,8 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame 
     void Update()
     {
+        if(!GameObject.FindGameObjectWithTag(targetTag))
+            target = GameObject.FindGameObjectWithTag(secondaryTargetTag).GetComponent<Transform>();
         //keep shield up for certain amount of time
         shieldTime = Mathf.Clamp(shieldTime - Time.deltaTime, -1, strategyLevel);
         Look();
@@ -66,7 +74,7 @@ public class EnemyController : MonoBehaviour
             attackController.Attack();
         }
         //logic for defending
-        if(defendController != null){
+        if(defendController.enabled){
             if(currHealth > healthController.currentHealth){
                 defendController.ShieldUp();
                 shieldTime = Random.Range(strategyLevel/3f, strategyLevel);

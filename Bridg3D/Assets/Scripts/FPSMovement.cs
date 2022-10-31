@@ -22,7 +22,10 @@ public class FPSMovement : MonoBehaviour
 
     Vector3 velocity;
 
+    InputManager input;
+
     void Start(){
+        input = GameObject.FindObjectOfType<InputManager>();
         sprintTime = sprintCapacity;
     }
 
@@ -38,8 +41,8 @@ public class FPSMovement : MonoBehaviour
         }
 
         //get key axes inputs
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
+        float x = input.GetAxis("Horizontal");
+        float z = input.GetAxis("Vertical");
 
         //move according to local rotation versus global position
         Vector3 move = transform.right * x + transform.forward * z;
@@ -48,7 +51,7 @@ public class FPSMovement : MonoBehaviour
         float speedModifier = 1f;
 
         //if trying to sprint
-        if(Input.GetAxis("Sprint") > 0){
+        if(Input.GetButtonDown("Sprint")){
             //make sure time is not negative and adjust as needed
             sprintTime = Mathf.Clamp(sprintTime - Time.deltaTime, 0, sprintCapacity);
             //if we have sprint time left
@@ -67,7 +70,7 @@ public class FPSMovement : MonoBehaviour
         controller.Move(move * speed * Time.deltaTime * speedModifier);
 
         //if jump button hit and currently on ground
-        if(Input.GetButtonDown("Jump") && isGrounded){
+        if(input.GetButtonDown("Jump") && isGrounded){
             //using physics to jump up specific height
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
@@ -77,5 +80,24 @@ public class FPSMovement : MonoBehaviour
 
         //move according to gravity and adjust for framerate
         controller.Move(velocity * Time.deltaTime);
+    }
+
+    void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        Rigidbody body = hit.collider.attachedRigidbody;
+
+        // no rigidbody
+        if (body == null || body.isKinematic)
+            return;
+
+        // Calculate push direction from move direction,
+        // we only push objects to the sides never up and down
+        Vector3 pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
+
+        // If you know how fast your character is trying to move,
+        // then you can also multiply the push velocity by that.
+
+        // Apply the push
+        body.velocity = hit.moveDirection * 3;
     }
 }

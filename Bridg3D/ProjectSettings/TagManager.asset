@@ -5,6 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - Market
+  - Enemy
+  - PlayerSkull
+  - PlayerHealthBar
+  - PlayerHeart
+  - DeadEnemy
   layers:
   - Default
   - TransparentFX

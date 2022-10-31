@@ -1,0 +1,45 @@
+Player
+	Weapon model/texture
+	Shield model/texture
+
+Yeoman
+	Body model/texture
+	Weapon model/texture
+
+Pikeman
+	Body model/texture
+	Weapon model/texture
+
+Man-at-Arms
+	Body model/texture
+	Weapon model/texture
+	Shield model/texture
+
+Knight
+	Body model/texture
+	Weapon model/texture
+	Shield model/texture
+
+Baron
+	Body model/texture
+	Weapon model/texture
+	Shield model/texture
+
+Duke
+	Body model/texture
+	Weapon model/texture
+	Shield model/texture
+
+Environment
+	Market
+		Stall
+		Person model/texture
+	Surrounding Areas
+		Sun
+		Houses/cottages
+		Land
+	Bridge
+		Railings
+		Floor
+		Walls
+		Posts

@@ -38,8 +38,9 @@ public class AttackController : CustomComponent
         //may add delay to actual taking of damage to match up with animation
         Collider[] colliders = Physics.OverlapSphere(attackPoint.position, attackRadius, targetLayer, QueryTriggerInteraction.Ignore);
         foreach(Collider coll in colliders){
-            //player/enemy def have healthcontroller, this won't be null based on layermask selected
-            coll.GetComponent<HealthController>().TakeDamage(damage);
+            HealthController hc = coll.GetComponent<HealthController>();
+            if(hc)
+                hc.TakeDamage(damage);
             //this could probably have the null check removed but for now its here
             //apply knockback correctly
             KnockbackController knockbackController = coll.GetComponent<KnockbackController>();
