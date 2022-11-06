@@ -89,27 +89,27 @@ public class MarketController : MonoBehaviour
         playerHealth.Heal(healthAmount);
     }
 
-    public void OpenUpgradeMenu(){
+    public bool OpenUpgradeMenu(){
         if(!inArea)
-            return;
+            return false;
         upgradeMenuOpen = true;
         upgradeMenuContainer.SetActive(true);
         player.GetComponentInChildren<MouseLook>().enabled = false;
-        player.GetComponent<PlayerController>().acceptCombatInput = false;
         player.GetComponent<FPSMovement>().enabled = false;
         upgradeMenu.UpdateMenu();
         Cursor.lockState = CursorLockMode.Confined;
+        return true;
     }
 
-    public void CloseUpgradeMenu(){
+    public bool CloseUpgradeMenu(){
         if(!inArea)
-            return;
+            return false;
         upgradeMenuOpen = false;
         upgradeMenuContainer.SetActive(false);
         player.GetComponentInChildren<MouseLook>().enabled = true;
-        player.GetComponent<PlayerController>().acceptCombatInput = true;
         player.GetComponent<FPSMovement>().enabled = true;
         Cursor.lockState = CursorLockMode.Locked;
+        return true;
     }
 
     //keep track of player being in range to buy stuff
@@ -126,7 +126,6 @@ public class MarketController : MonoBehaviour
             upgradeMenuOpen = false;
             upgradeMenuContainer.SetActive(false);
             player.GetComponentInChildren<MouseLook>().enabled = true;
-            player.GetComponent<PlayerController>().acceptCombatInput = true;
             player.GetComponent<FPSMovement>().enabled = true;
             Cursor.lockState = CursorLockMode.Confined;
         }
