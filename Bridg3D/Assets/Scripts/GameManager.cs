@@ -42,10 +42,19 @@ public class GameManager : MonoBehaviour
         playerHealthBar.setHealth(playerHealthController.currentHealth);
         marketHealthBar.setHealth(marketHealthController.currentHealth);
         if(playerHealthController.currentHealth <= 0){
+            Debug.Log("LOSE CONDITION");
             playerHealthBar.Die();
             returnToMenuTime -= Time.deltaTime;
             if(returnToMenuTime <= 0){
-                Cursor.lockState = CursorLockMode.Confined;
+                Cursor.lockState = CursorLockMode.None;
+                ReturnToMainMenu();
+            }
+        }
+        if(waveSpawner.nextWave >= waveSpawner.waves.Length){
+            Debug.Log("WIN CONDITION");
+            returnToMenuTime -= Time.deltaTime;
+            if(returnToMenuTime <= 0){
+                Cursor.lockState = CursorLockMode.None;
                 ReturnToMainMenu();
             }
         }

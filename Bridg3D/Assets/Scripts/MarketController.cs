@@ -97,7 +97,7 @@ public class MarketController : MonoBehaviour
         player.GetComponentInChildren<MouseLook>().enabled = false;
         player.GetComponent<FPSMovement>().enabled = false;
         upgradeMenu.UpdateMenu();
-        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.lockState = CursorLockMode.None;
         return true;
     }
 
@@ -127,7 +127,7 @@ public class MarketController : MonoBehaviour
             upgradeMenuContainer.SetActive(false);
             player.GetComponentInChildren<MouseLook>().enabled = true;
             player.GetComponent<FPSMovement>().enabled = true;
-            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.lockState = CursorLockMode.Locked;
         }
             
     }
