@@ -118,6 +118,7 @@ public class InputManager : MonoBehaviour
     }
 
     public void CloseKeybindMenu(){
+        Debug.Log("closekeybindmenu");
         keybindMenuOpen = false;
         keybindMenuContainer.SetActive(false);
         player.GetComponentInChildren<MouseLook>().enabled = true;

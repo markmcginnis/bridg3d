@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour
         switch(currState){
             case GameState.PAUSE:
                 //if game is paused, only actions are to undo the pausing
+                Cursor.lockState = CursorLockMode.Confined;
                 if(input.GetButtonDown("Cancel") || !pauseMenuOpen){
                     pauseMenuOpen = false;
                     currState = returnState;
@@ -50,6 +51,7 @@ public class PlayerController : MonoBehaviour
                 break;
             case GameState.KEYBINDS:
                 //if keybinds menu is open, only action is close keybind menu
+                Cursor.lockState = CursorLockMode.Confined;
                 if(input.GetButtonDown("Cancel")){
                     input.CloseKeybindMenu();
                     currState = GameState.PAUSE;
@@ -57,10 +59,10 @@ public class PlayerController : MonoBehaviour
                 break;
             case GameState.UPGRADES:
                 //if player is using market, only actions are to close the market or pause the game
-                if(input.GetButtonDown("Open Upgrade Menu")){
-                    if(marketController.CloseUpgradeMenu()){
-                        currState = GameState.COMBAT;
-                    }
+                Cursor.lockState = CursorLockMode.Confined;
+                if(input.GetButtonDown("Open Upgrade Menu") || !marketController.upgradeMenuOpen){
+                    marketController.CloseUpgradeMenu();
+                    currState = GameState.COMBAT;
                 }
                 if(input.GetButtonDown("Cancel")){
                     pauseMenuOpen = true;
@@ -69,6 +71,7 @@ public class PlayerController : MonoBehaviour
                 }
                 break;
             case GameState.COMBAT:
+            Cursor.lockState = CursorLockMode.Locked;
                 //default state, accept all combat inputs or state changing inputs
                 if(input.GetButtonDown("Defend")){
                     defendController.ShieldUp();

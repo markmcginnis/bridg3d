@@ -97,19 +97,21 @@ public class MarketController : MonoBehaviour
         player.GetComponentInChildren<MouseLook>().enabled = false;
         player.GetComponent<FPSMovement>().enabled = false;
         upgradeMenu.UpdateMenu();
-        Cursor.lockState = CursorLockMode.None;
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
         return true;
     }
 
-    public bool CloseUpgradeMenu(){
+    public void CloseUpgradeMenu(){
         if(!inArea)
-            return false;
+            return;
+        Debug.Log("closeupgrademenu");
         upgradeMenuOpen = false;
         upgradeMenuContainer.SetActive(false);
         player.GetComponentInChildren<MouseLook>().enabled = true;
         player.GetComponent<FPSMovement>().enabled = true;
         Cursor.lockState = CursorLockMode.Locked;
-        return true;
+        Cursor.visible = false;
     }
 
     //keep track of player being in range to buy stuff
@@ -122,6 +124,7 @@ public class MarketController : MonoBehaviour
     void OnTriggerExit(Collider other)
     {
         if(other.gameObject.Equals(player)){
+            Debug.Log("trigger exit");
             inArea = false;
             upgradeMenuOpen = false;
             upgradeMenuContainer.SetActive(false);

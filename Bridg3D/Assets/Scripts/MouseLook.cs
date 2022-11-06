@@ -13,6 +13,7 @@ public class MouseLook : MonoBehaviour
     
     void Start()
     {
+        Debug.Log("mouselook start");
         //lock cursor to prevent clicking out
         Cursor.lockState = CursorLockMode.Locked;
     }

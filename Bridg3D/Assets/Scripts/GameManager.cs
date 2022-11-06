@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(Cursor.lockState);
         playerHealthBar.setHealth(playerHealthController.currentHealth);
         marketHealthBar.setHealth(marketHealthController.currentHealth);
         if(playerHealthController.currentHealth <= 0){
