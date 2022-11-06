@@ -7,13 +7,15 @@ public class MenuManager : MonoBehaviour
 {
     public GameObject pauseMenuUI;
 
-    public void Play()
-    {
+    void Start(){
+        Cursor.lockState = CursorLockMode.Confined;
+    }
+
+    public void Play(){
         SceneManager.LoadScene("MainScene");
     }
 
-    public void Quit()
-    {
+    public void Quit(){
         UnityEngine.Debug.Log("quit");
         Application.Quit();
     }

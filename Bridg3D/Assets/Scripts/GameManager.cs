@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
             playerHealthBar.Die();
             returnToMenuTime -= Time.deltaTime;
             if(returnToMenuTime <= 0){
-                Cursor.lockState = CursorLockMode.None;
+                Cursor.lockState = CursorLockMode.Confined;
                 ReturnToMainMenu();
             }
         }
@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("WIN CONDITION");
             returnToMenuTime -= Time.deltaTime;
             if(returnToMenuTime <= 0){
-                Cursor.lockState = CursorLockMode.None;
+                Cursor.lockState = CursorLockMode.Confined;
                 ReturnToMainMenu();
             }
         }
