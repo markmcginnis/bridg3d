@@ -636,7 +636,7 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 8
-  coinValue: 10
+  coinValue: 5
   strategyLevel: 5
 --- !u!114 &6318777163133523191
 MonoBehaviour:

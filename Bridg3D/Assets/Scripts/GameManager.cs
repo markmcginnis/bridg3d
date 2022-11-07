@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     public TMP_Text enemyCountText;
     public TMP_Text walletText;
 
+    public TMP_Text endGameText;
+
     public HealthBar playerHealthBar;
     public HealthBar marketHealthBar;
 
@@ -44,6 +46,8 @@ public class GameManager : MonoBehaviour
         marketHealthBar.setHealth(marketHealthController.currentHealth);
         if(playerHealthController.currentHealth <= 0){
             Debug.Log("LOSE CONDITION");
+            endGameText.gameObject.SetActive(true);
+            endGameText.text = "LOSE!";
             playerHealthBar.Die();
             returnToMenuTime -= Time.deltaTime;
             if(returnToMenuTime <= 0){
@@ -53,6 +57,8 @@ public class GameManager : MonoBehaviour
         }
         if(!waveSpawner.enabled){
             Debug.Log("WIN CONDITION");
+            endGameText.gameObject.SetActive(true);
+            endGameText.text = "WIN!";
             returnToMenuTime -= Time.deltaTime;
             if(returnToMenuTime <= 0){
                 Cursor.lockState = CursorLockMode.Confined;
