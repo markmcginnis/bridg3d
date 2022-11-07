@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
                 ReturnToMainMenu();
             }
         }
-        if(waveSpawner.nextWave >= waveSpawner.waves.Length){
+        if(!waveSpawner.enabled){
             Debug.Log("WIN CONDITION");
             returnToMenuTime -= Time.deltaTime;
             if(returnToMenuTime <= 0){
