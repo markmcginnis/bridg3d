@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 
@@ -14,6 +15,8 @@ public class GameManager : MonoBehaviour
     public TMP_Text enemyCountText;
     public TMP_Text walletText;
 
+    public Slider attackCooldownSlider;
+
     public TMP_Text endGameText;
 
     public HealthBar playerHealthBar;
@@ -25,6 +28,8 @@ public class GameManager : MonoBehaviour
     public WalletController wallet;
 
     public PlayerController playerController;
+
+    public AttackController attackController;
     
     public float returnToMenuTime = 3f;
 
@@ -36,16 +41,20 @@ public class GameManager : MonoBehaviour
         menuManager = GetComponent<MenuManager>();
         playerHealthBar.setMaxHealth(playerHealthController.maxHealth);
         marketHealthBar.setMaxHealth(marketHealthController.maxHealth);
+        attackCooldownSlider.minValue = 0f;
+        attackCooldownSlider.maxValue = attackController.attackCooldown;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(Cursor.lockState);
+        // Debug.Log(Cursor.lockState);
         playerHealthBar.setHealth(playerHealthController.currentHealth);
         marketHealthBar.setHealth(marketHealthController.currentHealth);
+        attackCooldownSlider.maxValue = attackController.attackCooldown;
+        attackCooldownSlider.value = Mathf.Clamp(1 - attackController.attackTime/attackController.attackCooldown,attackCooldownSlider.minValue,attackCooldownSlider.maxValue);
         if(playerHealthController.currentHealth <= 0){
-            Debug.Log("LOSE CONDITION");
+            // Debug.Log("LOSE CONDITION");
             endGameText.gameObject.SetActive(true);
             endGameText.text = "LOSE!";
             playerHealthBar.Die();
@@ -56,7 +65,7 @@ public class GameManager : MonoBehaviour
             }
         }
         if(!waveSpawner.enabled){
-            Debug.Log("WIN CONDITION");
+            // Debug.Log("WIN CONDITION");
             endGameText.gameObject.SetActive(true);
             endGameText.text = "WIN!";
             returnToMenuTime -= Time.deltaTime;

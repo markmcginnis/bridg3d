@@ -11,7 +11,7 @@ public class AttackController : CustomComponent
     public LayerMask targetLayer;
     public Animator wepAnimator;
     public float attackCooldown = 1.5f;
-    float attackTime;
+    public float attackTime;
 
     void Start(){
         //start with being able to attack
@@ -20,7 +20,7 @@ public class AttackController : CustomComponent
 
     void Update(){
         //over time make sure the cooldown actually cools down
-        attackTime = Mathf.Clamp(attackTime - Time.deltaTime, -0.1f, attackCooldown);
+        attackTime = Mathf.Clamp(attackTime - Time.deltaTime, -0.0001f, attackCooldown);
     }
 
     public void Attack(){
