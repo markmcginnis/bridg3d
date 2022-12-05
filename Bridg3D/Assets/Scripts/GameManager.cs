@@ -33,6 +33,8 @@ public class GameManager : MonoBehaviour
     
     public float returnToMenuTime = 3f;
 
+    bool soundPlayed = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -56,6 +58,10 @@ public class GameManager : MonoBehaviour
         if(playerHealthController.currentHealth <= 0){
             // Debug.Log("LOSE CONDITION");
             endGameText.gameObject.SetActive(true);
+            if(!soundPlayed){
+                waveSpawner.audioManager.Play("Game_Over");
+                soundPlayed = true;
+            }
             endGameText.text = "LOSE!";
             playerHealthBar.Die();
             returnToMenuTime -= Time.deltaTime;

@@ -319,7 +319,6 @@ GameObject:
   - component: {fileID: 201117759}
   - component: {fileID: 201117755}
   - component: {fileID: 201117757}
-  - component: {fileID: 201117758}
   - component: {fileID: 201117760}
   m_Layer: 0
   m_Name: GameManager
@@ -415,53 +414,22 @@ MonoBehaviour:
     - {fileID: 6318777163133523184, guid: b0b788aaa9755b142b64ab37367a821d, type: 3}
     - {fileID: 6318777163133523184, guid: fedbdaf9564332f4f805dce21d81dc93, type: 3}
     - {fileID: 6318777163133523184, guid: 6061e9bf25dd8724c885edbfd4e2c40f, type: 3}
-    count: 070000000300000002000000
+    - {fileID: 6318777163133523184, guid: c33bb93e4f73ca94d94a3602733f2a22, type: 3}
+    count: 07000000030000000100000001000000
     rate: 3
   - name: Wave 4
     enemies:
     - {fileID: 6318777163133523184, guid: b0b788aaa9755b142b64ab37367a821d, type: 3}
     - {fileID: 6318777163133523184, guid: fedbdaf9564332f4f805dce21d81dc93, type: 3}
     - {fileID: 6318777163133523184, guid: 6061e9bf25dd8724c885edbfd4e2c40f, type: 3}
-    count: 0a0000000500000003000000
-    rate: 3
-  - name: Wave 5
-    enemies:
-    - {fileID: 6318777163133523184, guid: b0b788aaa9755b142b64ab37367a821d, type: 3}
-    - {fileID: 6318777163133523184, guid: fedbdaf9564332f4f805dce21d81dc93, type: 3}
-    - {fileID: 6318777163133523184, guid: 6061e9bf25dd8724c885edbfd4e2c40f, type: 3}
-    count: 0a0000000800000005000000
-    rate: 3
-  - name: Wave 6
-    enemies:
-    - {fileID: 6318777163133523184, guid: b0b788aaa9755b142b64ab37367a821d, type: 3}
-    - {fileID: 6318777163133523184, guid: fedbdaf9564332f4f805dce21d81dc93, type: 3}
-    - {fileID: 6318777163133523184, guid: 6061e9bf25dd8724c885edbfd4e2c40f, type: 3}
-    count: 0a0000000a00000008000000
-    rate: 3
-  - name: Wave 7
-    enemies:
-    - {fileID: 6318777163133523184, guid: b0b788aaa9755b142b64ab37367a821d, type: 3}
-    - {fileID: 6318777163133523184, guid: fedbdaf9564332f4f805dce21d81dc93, type: 3}
-    - {fileID: 6318777163133523184, guid: 6061e9bf25dd8724c885edbfd4e2c40f, type: 3}
-    count: 0a0000000a0000000a000000
+    - {fileID: 6318777163133523184, guid: c33bb93e4f73ca94d94a3602733f2a22, type: 3}
+    count: 07000000030000000200000002000000
     rate: 3
   nextWave: 0
-  timeBetweenWaves: 20
+  timeBetweenWaves: 16
   waveCountdown: 0
   state: 2
---- !u!114 &201117758
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 201117754}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99baa2f809365f74ba27101895a00b11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sounds: []
+  audioManager: {fileID: 4471863107310714114}
 --- !u!114 &201117759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -816,7 +784,6 @@ Transform:
   - {fileID: 581197735}
   - {fileID: 559878534}
   - {fileID: 110203611}
-  - {fileID: 349830193}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1285,7 +1252,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 550a17a02d69aae40b9c87992fbd32db, type: 2}
+  - {fileID: 2100000, guid: 872c11aabde84a748b3c50296ac21142, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1323,12 +1290,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 349830189}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -15.429227, y: 21, z: 45.58}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -1.9450002, y: 11.205219, z: 3.3313437}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 289694887}
-  m_RootOrder: 4
+  m_Father: {fileID: 450939781}
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &382395937
 GameObject:
@@ -1611,6 +1578,7 @@ Transform:
   - {fileID: 1247480304}
   - {fileID: 668637743}
   - {fileID: 705507995}
+  - {fileID: 349830193}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4352,6 +4320,7 @@ GameObject:
   - component: {fileID: 1471747356}
   - component: {fileID: 1471747358}
   - component: {fileID: 1471747359}
+  - component: {fileID: 1471747360}
   m_Layer: 7
   m_Name: MarketArea
   m_TagString: Market
@@ -4542,6 +4511,34 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.1, y: 0.1, z: 0.1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1471747360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1471747354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99baa2f809365f74ba27101895a00b11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Hurt
+    clip: {fileID: 8300000, guid: 2e620d8c97d1cbb40added4a13d6fdd6, type: 3}
+    volume: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Die
+    clip: {fileID: 8300000, guid: 912ea7e8c1e824c4ea62c2d8d7a1041f, type: 3}
+    volume: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Market_Use
+    clip: {fileID: 8300000, guid: 77cd02c9ce8176d42af455e840346e0d, type: 3}
+    volume: 1
+    loop: 0
+    source: {fileID: 0}
 --- !u!1 &1553259282
 GameObject:
   m_ObjectHideFlags: 0
@@ -6492,12 +6489,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4471863108950317590, guid: 3a889038e22d55249ba91261a4f75658, type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 4471863107310714114}
+    - target: {fileID: 4471863108950317590, guid: 3a889038e22d55249ba91261a4f75658, type: 3}
       propertyPath: attackCooldown
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4471863108950317591, guid: 3a889038e22d55249ba91261a4f75658, type: 3}
       propertyPath: shieldCooldown
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4471863108950317593, guid: 3a889038e22d55249ba91261a4f75658, type: 3}
+      propertyPath: audioManager
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4471863108950317593, guid: 3a889038e22d55249ba91261a4f75658, type: 3}
       propertyPath: marketController
@@ -6557,6 +6562,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bc0649d254f74545b18f1ef8891427b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4471863107310714114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1715840736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99baa2f809365f74ba27101895a00b11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Attack
+    clip: {fileID: 8300000, guid: 6326f326531327f4b86854f7fc5cd4e6, type: 3}
+    volume: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Hurt
+    clip: {fileID: 8300000, guid: 2e620d8c97d1cbb40added4a13d6fdd6, type: 3}
+    volume: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Die
+    clip: {fileID: 8300000, guid: 912ea7e8c1e824c4ea62c2d8d7a1041f, type: 3}
+    volume: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Game_Over
+    clip: {fileID: 8300000, guid: 11273e3815e00cf409cf0e88c04959c4, type: 3}
+    volume: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Mid-Wave Song
+    clip: {fileID: 8300000, guid: 4d9a246a520984e44a5ab32167dc10b9, type: 3}
+    volume: 0.25
+    loop: 1
+    source: {fileID: 0}
+  - name: Post-Wave Song
+    clip: {fileID: 8300000, guid: 80b9f8edda9eb2f418874836e890c19a, type: 3}
+    volume: 0.5
+    loop: 1
+    source: {fileID: 0}
+  - name: Coin_Pickup
+    clip: {fileID: 8300000, guid: d8355214554001549b3a35182ae0c501, type: 3}
+    volume: 1
+    loop: 0
+    source: {fileID: 0}
 --- !u!224 &6562734591365676540
 RectTransform:
   m_ObjectHideFlags: 0

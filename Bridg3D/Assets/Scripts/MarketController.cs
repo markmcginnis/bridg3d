@@ -33,6 +33,8 @@ public class MarketController : MonoBehaviour
     [SerializeField]
     float healthAmount = 10f;
 
+    AudioManager audioManager;
+
     public void BuyUpgrade(string upgradeID){
         //find upgrade based on "key" value
         Upgrade upgrade = null;
@@ -54,6 +56,7 @@ public class MarketController : MonoBehaviour
             return;
         }
         playerWallet.DecreaseBalance(upgrade.cost);
+        audioManager.Play("Market_Use");
 
         //find the controller we mean to modify
         CustomComponent controller = (CustomComponent)player.GetComponent(System.Type.GetType(upgrade.controller));
@@ -87,6 +90,7 @@ public class MarketController : MonoBehaviour
         //take their money and heal them
         playerWallet.DecreaseBalance(healthCost);
         playerHealth.Heal(healthAmount);
+        audioManager.Play("Market_Use");
     }
 
     public bool OpenUpgradeMenu(){
@@ -133,5 +137,9 @@ public class MarketController : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
         }
             
+    }
+
+    void Start(){
+        audioManager = GetComponent<AudioManager>();
     }
 }
