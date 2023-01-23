@@ -1,0 +1,19 @@
+vary enemy movement or awareness of state/other/goals - try to avoid mob mentality of stacking
+^stateful enemy and transitions
+
+perhaps also simple navigation system based on waypoints
+
+could also adjust quantity/quality of enemies, maybe less enemies more difficulty
+
+perhaps less health for each enemy, or increase knockback by a lot, maybe do both and have less enemies
+
+maybe add skyrim style foosahra pushback or left for dead push back ability
+
+maybe stamina bar for that or buy items from market
+
+add shield bash attack (minimal damage or lots of knockback)
+
+maybe parry/defend attack stuns enemies and changes textures/adds particle
+
+more combat variability, add more to it then just blocking and attacking
+

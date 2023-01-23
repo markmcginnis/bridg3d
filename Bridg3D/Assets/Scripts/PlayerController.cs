@@ -14,8 +14,11 @@ public class PlayerController : MonoBehaviour
     MarketController marketController;
     InputManager input;
 
-    public bool acceptCombatInput = true;
-    public bool acceptOtherInput = true;
+    public enum GameState {COMBAT, UPGRADES, PAUSE, KEYBINDS}
+
+    GameState currState = GameState.COMBAT;
+    GameState returnState;
+
     public bool pauseMenuOpen = false;
 
     void Start(){
@@ -28,36 +31,74 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(acceptCombatInput){
-            if(input.GetButtonDown("Defend")){
-                defendController.ShieldUp();
-            }
-            if(input.GetButtonUp("Defend")){
-                defendController.ShieldDown();
-            }
-            if(input.GetButtonDown("Attack")){
-                attackController.Attack();
-            }
+        if(input.keybindMenuOpen){
+            currState = GameState.KEYBINDS;
         }
-        if(acceptOtherInput){
-            if(input.GetButtonDown("Buy Health")){
-            marketController.BuyHealth();
+        else if(pauseMenuOpen){
+            currState = GameState.PAUSE;
         }
-        if((input.GetButtonDown("Cancel") || input.GetButtonDown("Open Upgrade Menu")) && marketController.upgradeMenuOpen){
-            marketController.CloseUpgradeMenu();
-        }
-        else if(input.GetButtonDown("Open Upgrade Menu") && !marketController.upgradeMenuOpen && !input.keybindMenuOpen){
-            marketController.OpenUpgradeMenu();
-        }
-        }
-        if((input.GetButtonDown("Cancel") || input.GetButtonDown("Open Keybind Menu")) && input.keybindMenuOpen){
-            input.CloseKeybindMenu();
-        }
-        else if(input.GetButtonDown("Open Keybind Menu") && !input.keybindMenuOpen && !marketController.upgradeMenuOpen){
-            input.OpenKeybindMenu();
-        }
-        if(input.GetButtonDown("Cancel") && !(input.keybindMenuOpen || marketController.upgradeMenuOpen)){
-            pauseMenuOpen = !pauseMenuOpen;
+
+        Debug.Log(currState);
+
+        switch(currState){
+            case GameState.PAUSE:
+                //if game is paused, only actions are to undo the pausing
+                Cursor.lockState = CursorLockMode.Confined;
+                if(input.GetButtonDown("Cancel") || !pauseMenuOpen){
+                    pauseMenuOpen = false;
+                    currState = returnState;
+                }
+                break;
+            case GameState.KEYBINDS:
+                //if keybinds menu is open, only action is close keybind menu
+                Cursor.lockState = CursorLockMode.Confined;
+                if(input.GetButtonDown("Cancel")){
+                    input.CloseKeybindMenu();
+                    currState = GameState.PAUSE;
+                }
+                break;
+            case GameState.UPGRADES:
+                //if player is using market, only actions are to close the market or pause the game
+                Cursor.lockState = CursorLockMode.Confined;
+                if(input.GetButtonDown("Open Upgrade Menu") || !marketController.upgradeMenuOpen){
+                    marketController.CloseUpgradeMenu();
+                    currState = GameState.COMBAT;
+                }
+                if(input.GetButtonDown("Cancel")){
+                    pauseMenuOpen = true;
+                    returnState = currState;
+                    currState = GameState.PAUSE;
+                }
+                break;
+            case GameState.COMBAT:
+            Cursor.lockState = CursorLockMode.Locked;
+                //default state, accept all combat inputs or state changing inputs
+                if(input.GetButtonDown("Defend")){
+                    defendController.ShieldUp();
+                }
+                if(input.GetButtonUp("Defend")){
+                    defendController.ShieldDown();
+                }
+                if(input.GetButtonDown("Attack")){
+                    attackController.Attack();
+                }
+                if(input.GetButtonDown("Buy Health")){
+                    marketController.BuyHealth();
+                }
+                if(input.GetButtonDown("Open Upgrade Menu") && !marketController.upgradeMenuOpen){
+                    if(marketController.OpenUpgradeMenu()){
+                        currState = GameState.UPGRADES;
+                    }
+                }
+                if(input.GetButtonDown("Cancel")){
+                    pauseMenuOpen = true;
+                    returnState = currState;
+                    currState = GameState.PAUSE;
+                }
+                break;
+            default:
+                Debug.LogError("ERROR: Default GameState case");
+                break;
         }
     }
 }

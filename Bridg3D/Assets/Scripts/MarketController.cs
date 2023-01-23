@@ -33,6 +33,8 @@ public class MarketController : MonoBehaviour
     [SerializeField]
     float healthAmount = 10f;
 
+    AudioManager audioManager;
+
     public void BuyUpgrade(string upgradeID){
         //find upgrade based on "key" value
         Upgrade upgrade = null;
@@ -54,6 +56,7 @@ public class MarketController : MonoBehaviour
             return;
         }
         playerWallet.DecreaseBalance(upgrade.cost);
+        audioManager.Play("Market_Use");
 
         //find the controller we mean to modify
         CustomComponent controller = (CustomComponent)player.GetComponent(System.Type.GetType(upgrade.controller));
@@ -87,29 +90,32 @@ public class MarketController : MonoBehaviour
         //take their money and heal them
         playerWallet.DecreaseBalance(healthCost);
         playerHealth.Heal(healthAmount);
+        audioManager.Play("Market_Use");
     }
 
-    public void OpenUpgradeMenu(){
+    public bool OpenUpgradeMenu(){
         if(!inArea)
-            return;
+            return false;
         upgradeMenuOpen = true;
         upgradeMenuContainer.SetActive(true);
         player.GetComponentInChildren<MouseLook>().enabled = false;
-        player.GetComponent<PlayerController>().acceptCombatInput = false;
         player.GetComponent<FPSMovement>().enabled = false;
         upgradeMenu.UpdateMenu();
         Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
+        return true;
     }
 
     public void CloseUpgradeMenu(){
         if(!inArea)
             return;
+        Debug.Log("closeupgrademenu");
         upgradeMenuOpen = false;
         upgradeMenuContainer.SetActive(false);
         player.GetComponentInChildren<MouseLook>().enabled = true;
-        player.GetComponent<PlayerController>().acceptCombatInput = true;
         player.GetComponent<FPSMovement>().enabled = true;
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     //keep track of player being in range to buy stuff
@@ -122,14 +128,18 @@ public class MarketController : MonoBehaviour
     void OnTriggerExit(Collider other)
     {
         if(other.gameObject.Equals(player)){
+            Debug.Log("trigger exit");
             inArea = false;
             upgradeMenuOpen = false;
             upgradeMenuContainer.SetActive(false);
             player.GetComponentInChildren<MouseLook>().enabled = true;
-            player.GetComponent<PlayerController>().acceptCombatInput = true;
             player.GetComponent<FPSMovement>().enabled = true;
-            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.lockState = CursorLockMode.Locked;
         }
             
+    }
+
+    void Start(){
+        audioManager = GetComponent<AudioManager>();
     }
 }

@@ -7,16 +7,19 @@ public class HealthController : CustomComponent
     public float maxHealth = 100f;
     public float currentHealth;
     public float damageModifier = 1f;
+    AudioManager audioManager;
 
     // Start is called before the first frame update
     void Start()
     {
         currentHealth = maxHealth;
+        audioManager = GetComponent<AudioManager>();
     }
 
     public void TakeDamage(float damage){
         //adjust damage for potential shield then take it
         currentHealth -= damage * damageModifier;
+        audioManager.Play("Hurt");
         if(currentHealth <= 0){
             //can only die after taking damage
             Die();
@@ -31,5 +34,6 @@ public class HealthController : CustomComponent
     virtual public void Die(){
         //may need to update with general dying stuff
         Debug.Log(gameObject.name + " DEAD");
+        audioManager.Play("Die");
     }
 }

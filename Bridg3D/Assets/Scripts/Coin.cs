@@ -13,6 +13,7 @@ public class Coin : MonoBehaviour
         if(!walletController)
             return;
         walletController.IncreaseBalance(value);
+        GameObject.FindGameObjectWithTag("Player").GetComponent<AudioManager>().Play("Coin_Pickup");
         GameObject.Destroy(gameObject);
     }
 }

@@ -11,16 +11,19 @@ public class AttackController : CustomComponent
     public LayerMask targetLayer;
     public Animator wepAnimator;
     public float attackCooldown = 1.5f;
-    float attackTime;
+    public float attackTime;
+
+    public AudioManager audioManager;
 
     void Start(){
         //start with being able to attack
         attackTime = 0;
+        audioManager = GetComponent<AudioManager>();
     }
 
     void Update(){
         //over time make sure the cooldown actually cools down
-        attackTime = Mathf.Clamp(attackTime - Time.deltaTime, -0.1f, attackCooldown);
+        attackTime = Mathf.Clamp(attackTime - Time.deltaTime, -0.0001f, attackCooldown);
     }
 
     public void Attack(){
@@ -35,6 +38,7 @@ public class AttackController : CustomComponent
             return;
         //this may need to change strings
         wepAnimator.Play("WepPlaceholder_Attack",0);
+        audioManager.Play("Attack");
         //may add delay to actual taking of damage to match up with animation
         Collider[] colliders = Physics.OverlapSphere(attackPoint.position, attackRadius, targetLayer, QueryTriggerInteraction.Ignore);
         foreach(Collider coll in colliders){

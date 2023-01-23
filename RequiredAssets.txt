@@ -1,35 +1,3 @@
-Player
-	Weapon model/texture
-	Shield model/texture
-
-Yeoman
-	Body model/texture
-	Weapon model/texture
-
-Pikeman
-	Body model/texture
-	Weapon model/texture
-
-Man-at-Arms
-	Body model/texture
-	Weapon model/texture
-	Shield model/texture
-
-Knight
-	Body model/texture
-	Weapon model/texture
-	Shield model/texture
-
-Baron
-	Body model/texture
-	Weapon model/texture
-	Shield model/texture
-
-Duke
-	Body model/texture
-	Weapon model/texture
-	Shield model/texture
-
 Environment
 	Market
 		Stall
@@ -43,3 +11,23 @@ Environment
 		Floor
 		Walls
 		Posts
+
+Sounds
+	Player
+		Attack Sounds (2-4)
+		Hurt Sounds (3-5)
+		
+	Enemies
+		Attack Sounds (3-6)
+		Hurt Sounds (5-8)
+	Market
+		Heal Sound
+		Upgrade Sound
+	General
+		Button Click Sound
+	Music
+		Main Menu Theme
+		Combat Theme
+		Peaceful Theme
+		Win Theme
+		Lose Theme

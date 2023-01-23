@@ -27,9 +27,12 @@ public class WaveSpawner : MonoBehaviour
 
     public SpawnState state = SpawnState.COUNTING;
 
+    public AudioManager audioManager;
+
     void Start()
     {
         waveCountdown = timeBetweenWaves;
+        audioManager.Play("Post-Wave Song");
     }
 
     
@@ -42,6 +45,8 @@ public class WaveSpawner : MonoBehaviour
             {
                 //wave complete, go to next wave, restart counter/states
                 waveCompleted();
+                audioManager.Stop("Mid-Wave Song");
+                audioManager.Play("Post-Wave Song");
             }
             else
             {
@@ -56,6 +61,8 @@ public class WaveSpawner : MonoBehaviour
                 // GameObject.Find("BetweenWavesSong").GetComponent<AudioSource>().enabled = false;
                 // GameObject.Find("DuringWavesSong").GetComponent<AudioSource>().enabled = true;
                 StartCoroutine(spawnWave(waves[nextWave])); //spawn wave method
+                audioManager.Stop("Post-Wave Song");
+                audioManager.Play("Mid-Wave Song");
             }
         }
         else

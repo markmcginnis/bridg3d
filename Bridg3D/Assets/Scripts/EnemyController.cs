@@ -70,7 +70,7 @@ public class EnemyController : MonoBehaviour
         if(distance.magnitude > followDistance)
             Move();
         //logic for attacking
-        if((target.position - transform.position).magnitude < attackRange){
+        if((target.position - transform.position).magnitude < attackRange || (GameObject.FindGameObjectWithTag(secondaryTargetTag).GetComponent<Transform>().position - transform.position).magnitude < attackRange){
             attackController.Attack();
         }
         //logic for defending

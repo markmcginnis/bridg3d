@@ -582,6 +582,7 @@ GameObject:
   - component: {fileID: 6318777163133523190}
   - component: {fileID: 6318777163133523187}
   - component: {fileID: 6318777163133523185}
+  - component: {fileID: 8202542299276750021}
   m_Layer: 6
   m_Name: Man-at-Arms
   m_TagString: Enemy
@@ -635,7 +636,7 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 8
-  coinValue: 20
+  coinValue: 10
   strategyLevel: 5
 --- !u!114 &6318777163133523191
 MonoBehaviour:
@@ -658,6 +659,8 @@ MonoBehaviour:
     m_Bits: 128
   wepAnimator: {fileID: 6318777161113860234}
   attackCooldown: 1.5
+  attackTime: 0
+  audioManager: {fileID: 0}
 --- !u!114 &6318777163133522956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -723,6 +726,34 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8202542299276750021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6318777163133523188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99baa2f809365f74ba27101895a00b11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Attack
+    clip: {fileID: 8300000, guid: 3e593655fe312464485ef453b9f4625d, type: 3}
+    volume: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Hurt
+    clip: {fileID: 8300000, guid: 7caa6a5b28710aa4caa5a02f9562b200, type: 3}
+    volume: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Die
+    clip: {fileID: 8300000, guid: bc3550d21f08de849bd421b22b030a45, type: 3}
+    volume: 1
+    loop: 0
+    source: {fileID: 0}
 --- !u!1001 &3352847551816009958
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -29,6 +29,10 @@ public class InputManager : MonoBehaviour
     public bool keybindMenuOpen = false;
     public GameObject keybindMenuContainer;
 
+    void Awake() {
+        DontDestroyOnLoad(gameObject);
+    }
+
     void OnEnable(){
         player = GameObject.FindGameObjectWithTag("Player");
         keybinds = new Dictionary<string, KeyCode>();
@@ -112,20 +116,20 @@ public class InputManager : MonoBehaviour
     public void OpenKeybindMenu(){
         keybindMenuOpen = true;
         keybindMenuContainer.SetActive(true);
-        player.GetComponentInChildren<MouseLook>().enabled = false;
-        player.GetComponent<PlayerController>().acceptCombatInput = false;
-        player.GetComponent<PlayerController>().acceptOtherInput = false;
-        player.GetComponent<FPSMovement>().enabled = false;
+        if(player){
+            player.GetComponentInChildren<MouseLook>().enabled = false;
+            player.GetComponent<FPSMovement>().enabled = false;
+        }
         Cursor.lockState = CursorLockMode.None;
     }
 
     public void CloseKeybindMenu(){
         keybindMenuOpen = false;
         keybindMenuContainer.SetActive(false);
-        player.GetComponentInChildren<MouseLook>().enabled = true;
-        player.GetComponent<PlayerController>().acceptCombatInput = true;
-        player.GetComponent<PlayerController>().acceptOtherInput = true;
-        player.GetComponent<FPSMovement>().enabled = true;
+        if(player){
+            player.GetComponentInChildren<MouseLook>().enabled = true;
+            player.GetComponent<FPSMovement>().enabled = true;
+        }
         Cursor.lockState = CursorLockMode.Locked;
     }
 }
