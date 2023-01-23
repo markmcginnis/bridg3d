@@ -426,7 +426,7 @@ MonoBehaviour:
     count: 07000000030000000200000002000000
     rate: 3
   nextWave: 0
-  timeBetweenWaves: 16
+  timeBetweenWaves: 32
   waveCountdown: 0
   state: 2
   audioManager: {fileID: 4471863107310714114}
@@ -2624,6 +2624,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keybindItem: {fileID: 483969986960485911, guid: 902c0d8cded95f84c9447590ce4ba400, type: 3}
+  rebindPrompt: {fileID: 0}
 --- !u!114 &978858715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4523,6 +4524,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99baa2f809365f74ba27101895a00b11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentSongName: 
   sounds:
   - name: Hurt
     clip: {fileID: 8300000, guid: 2e620d8c97d1cbb40added4a13d6fdd6, type: 3}
@@ -6574,6 +6576,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99baa2f809365f74ba27101895a00b11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentSongName: 
   sounds:
   - name: Attack
     clip: {fileID: 8300000, guid: 6326f326531327f4b86854f7fc5cd4e6, type: 3}
@@ -6601,9 +6604,9 @@ MonoBehaviour:
     loop: 1
     source: {fileID: 0}
   - name: Post-Wave Song
-    clip: {fileID: 8300000, guid: 80b9f8edda9eb2f418874836e890c19a, type: 3}
+    clip: {fileID: 8300000, guid: 20513b0f22fb9254ebfae3a15a8e8951, type: 3}
     volume: 0.5
-    loop: 1
+    loop: 0
     source: {fileID: 0}
   - name: Coin_Pickup
     clip: {fileID: 8300000, guid: d8355214554001549b3a35182ae0c501, type: 3}

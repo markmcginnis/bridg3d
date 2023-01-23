@@ -9,6 +9,7 @@ public class KeybindMenu : MonoBehaviour
 {
     InputManager inputManager;
     public GameObject keybindItem;
+    public GameObject rebindPrompt;
     string rebindAction = null;
     Dictionary<string, TMP_Text> labelNames;
 
@@ -60,8 +61,13 @@ public class KeybindMenu : MonoBehaviour
     }
 
     void Update(){
-        if(rebindAction == null)
+        if(rebindAction == null){
+            rebindPrompt.SetActive(false);
             return;
+        }
+        else{
+            rebindPrompt.SetActive(true);
+        }
         KeyCode[] allKeycodes = (KeyCode[])Enum.GetValues(typeof(KeyCode));
         foreach(KeyCode keyCode in allKeycodes){
             if(Input.GetKeyDown(keyCode)){

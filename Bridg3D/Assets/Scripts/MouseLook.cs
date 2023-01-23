@@ -10,17 +10,21 @@ public class MouseLook : MonoBehaviour
     public Transform playerBody;
 
     float xRotation = 0f;
+
+    SettingsManager settingsManager;
     
     void Start()
     {
         Debug.Log("mouselook start");
         //lock cursor to prevent clicking out
         Cursor.lockState = CursorLockMode.Locked;
+        settingsManager = FindObjectOfType<SettingsManager>();
     }
 
     
     void Update()
     {
+        mouseSens = settingsManager.mouseSens;
         //get mouse input and multiply by sens and adjust for framerate
         float mouseX = Input.GetAxis("Mouse X") * mouseSens * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSens * Time.deltaTime;
