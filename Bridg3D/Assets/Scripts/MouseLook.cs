@@ -24,7 +24,7 @@ public class MouseLook : MonoBehaviour
     
     void Update()
     {
-        mouseSens = settingsManager.mouseSens;
+        mouseSens = SettingsManager.settings.mouseSens;
         //get mouse input and multiply by sens and adjust for framerate
         float mouseX = Input.GetAxis("Mouse X") * mouseSens * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSens * Time.deltaTime;

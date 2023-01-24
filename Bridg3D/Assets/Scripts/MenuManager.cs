@@ -7,11 +7,14 @@ public class MenuManager : MonoBehaviour
 {
     public GameObject pauseMenuUI;
 
-    AudioManager audioManager;
+    public AudioManager audioManager;
 
     void Start(){
         Cursor.lockState = CursorLockMode.Confined;
-        audioManager = FindObjectOfType<AudioManager>();
+        PlayerController playerController = FindObjectOfType<PlayerController>();
+        if(!playerController)
+            return;
+        audioManager = playerController.GetComponent<AudioManager>();        
     }
 
     public void Play(){
@@ -24,7 +27,7 @@ public class MenuManager : MonoBehaviour
     }
 
     public void Pause(){
-        Debug.Log("pause");
+        // Debug.Log("pause");
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         Cursor.lockState = CursorLockMode.Confined;
@@ -32,7 +35,7 @@ public class MenuManager : MonoBehaviour
     }
 
     public void Resume(){
-        Debug.Log("resume");
+        // Debug.Log("resume");
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         Cursor.lockState = CursorLockMode.Locked;

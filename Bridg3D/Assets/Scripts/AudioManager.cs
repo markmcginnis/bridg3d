@@ -30,32 +30,50 @@ public class AudioManager : MonoBehaviour
             s.source.volume = s.volume;
             s.source.loop = s.loop;
         }
-        ChangeVolume(FindObjectOfType<SettingsManager>().audioVolume);
+        ChangeVolume(SettingsManager.settings.audioVolume);
     }
 
     public void Play(string name)
     {
-        if(name == null || name == "")
+        if(name == null || name == ""){
+            // Debug.Log((name == null) ? "name was null to play" : "name was empty to play");
             return;
+        }
         Sound s = Array.Find(sounds, sound => sound.name == name);
         if(s == null)
         {
             UnityEngine.Debug.LogError(name + " sound not found in Play");
             return;
         }
-        s.source.Play();
-        if(name.EndsWith("Song"))
+        // Debug.Log("name to play: " + name + " - currentsongname: ~" + currentSongName + "~");
+        if(name.EndsWith("Song")){
             currentSongName = name;
+            if(!s.source.isPlaying){
+                s.source.Play();
+            }
+            return;
+        }
+        s.source.Play();
     }
 
     public void Pause(string name)
     {
-        if(name == null || name == "")
+        if(name == null || name == ""){
+            // Debug.Log((name == null) ? "name was null to pause" : "name was empty to pause");
             return;
+        }
         Sound s = Array.Find(sounds, sound => sound.name == name);
         if (s == null)
         {
             UnityEngine.Debug.LogError(name + " sound not found in Pause");
+            return;
+        }
+        // Debug.Log("name to pause: " + name + " - currentsongname: ~" + currentSongName + "~");
+        if(name.EndsWith("Song")){
+            currentSongName = name;
+            if(s.source.isPlaying){
+                s.source.Pause();
+            }
             return;
         }
         s.source.Pause();

@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour
 
     bool soundPlayed = false;
 
+    public bool pauseMenuOpen = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -80,11 +82,15 @@ public class GameManager : MonoBehaviour
                 ReturnToMainMenu();
             }
         }
-        if(playerController.pauseMenuOpen){
-            Pause();
-        }
-        else{
-            Resume();
+        if(playerController.pauseMenuOpen != pauseMenuOpen){
+            pauseMenuOpen = playerController.pauseMenuOpen;
+            // Debug.Log("pause state changed");
+            if(pauseMenuOpen){
+                Pause();
+            }
+            else{
+                Resume();
+            }
         }
         if(marketHealthController.currentHealth <= 0)
             marketHealthBar.Die();
@@ -110,12 +116,10 @@ public class GameManager : MonoBehaviour
     }
 
     public void Resume(){
-        playerController.pauseMenuOpen = false;
         menuManager.Resume();
     }
 
     public void Pause(){
-        playerController.pauseMenuOpen = true;
         menuManager.Pause();
     }
 }
