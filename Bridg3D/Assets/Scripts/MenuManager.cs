@@ -21,6 +21,14 @@ public class MenuManager : MonoBehaviour
         SceneManager.LoadScene("MainScene");
     }
 
+    public void MainMenu(){
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void LoadEndScene(bool isVictory){
+        SceneManager.LoadScene((isVictory) ? "WinMenu" : "LossMenu");
+    }
+
     public void Quit(){
         UnityEngine.Debug.Log("quit");
         Application.Quit();

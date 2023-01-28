@@ -23,6 +23,7 @@ public class EnemyController : MonoBehaviour
     public Transform groundCheck;
     public float groundDist = 0.5f;
     public LayerMask groundMask;
+    // public float moveAngleDeviation = 30f;
     bool isGrounded;
 
     Vector3 velocity;
@@ -111,10 +112,14 @@ public class EnemyController : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
 
         //decide x and z velocity
+        // float angleDeviation = Random.Range(-moveAngleDeviation,moveAngleDeviation);
+        // int angleModifier = Random.Range(-1,2);
         Vector3 directionalMove = (target.position - transform.position).normalized * speed;
+        // directionalMove = Quaternion.AngleAxis(angleDeviation + moveAngleDeviation * angleModifier,Vector3.up) * directionalMove;
 
         //combine direction and gravity
         Vector3 move = new Vector3(directionalMove.x, velocity.y, directionalMove.z);
+        // move = Quaternion.RotateTowards(transform.rotation,Quaternion.AngleAxis(angleDeviation,transform.forward),moveAngleDeviation).eulerAngles;
 
         //move according to gravity and adjust for framerate
         controller.Move(move * Time.deltaTime);

@@ -7,9 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    WaveSpawner waveSpawner;
-    AudioManager audioManager;
-    MenuManager menuManager;
+    public WaveSpawner waveSpawner;
+    public MenuManager menuManager;
 
     public TMP_Text waveText;
     public TMP_Text enemyCountText;
@@ -40,9 +39,6 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        waveSpawner = GetComponent<WaveSpawner>();
-        audioManager = GetComponent<AudioManager>();
-        menuManager = GetComponent<MenuManager>();
         playerHealthBar.setMaxHealth(playerHealthController.maxHealth);
         marketHealthBar.setMaxHealth(marketHealthController.maxHealth);
         attackCooldownSlider.minValue = 0f;
@@ -52,7 +48,6 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Debug.Log(Cursor.lockState);
         playerHealthBar.setHealth(playerHealthController.currentHealth);
         marketHealthBar.setHealth(marketHealthController.currentHealth);
         attackCooldownSlider.maxValue = attackController.attackCooldown;
@@ -69,7 +64,7 @@ public class GameManager : MonoBehaviour
             returnToMenuTime -= Time.deltaTime;
             if(returnToMenuTime <= 0){
                 Cursor.lockState = CursorLockMode.Confined;
-                ReturnToMainMenu();
+                menuManager.LoadEndScene(false);
             }
         }
         if(!waveSpawner.enabled){
@@ -79,17 +74,17 @@ public class GameManager : MonoBehaviour
             returnToMenuTime -= Time.deltaTime;
             if(returnToMenuTime <= 0){
                 Cursor.lockState = CursorLockMode.Confined;
-                ReturnToMainMenu();
+                menuManager.LoadEndScene(true);
             }
         }
         if(playerController.pauseMenuOpen != pauseMenuOpen){
             pauseMenuOpen = playerController.pauseMenuOpen;
             // Debug.Log("pause state changed");
             if(pauseMenuOpen){
-                Pause();
+                menuManager.Pause();
             }
             else{
-                Resume();
+                menuManager.Resume();
             }
         }
         if(marketHealthController.currentHealth <= 0)
@@ -109,17 +104,5 @@ public class GameManager : MonoBehaviour
 
     void UpdateWalletText(float balance){
         walletText.text = "Coins: " + ((int)balance).ToString();
-    }
-
-    public void ReturnToMainMenu(){
-        SceneManager.LoadScene("MainMenu");
-    }
-
-    public void Resume(){
-        menuManager.Resume();
-    }
-
-    public void Pause(){
-        menuManager.Pause();
     }
 }
