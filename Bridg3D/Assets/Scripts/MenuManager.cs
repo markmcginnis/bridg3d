@@ -12,6 +12,7 @@ public class MenuManager : MonoBehaviour
 
     void Start(){
         // Cursor.lockState = CursorLockMode.Confined;
+        MouseAdjuster.SetState(CursorLockMode.Confined);
         playerController = FindObjectOfType<PlayerController>();
         if(!playerController)
             return;

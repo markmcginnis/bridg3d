@@ -48,6 +48,7 @@ public class EnemyHealthController : HealthController
         this.gameObject.tag = "DeadEnemy";
         Vector3 backward = this.transform.forward;
         this.transform.Find("BodyPlaceholder").GetComponent<Rigidbody>().AddForce(this.transform.forward*-50, ForceMode.Force);
+        this.enabled = false;
         //GameObject.Destroy(gameObject);
     }
 }

@@ -10,5 +10,5 @@ public enum Difficulty {EASY, MEDIUM, HARD};
 
     public float audioVolume = 1f;
 
-    public float mouseSens = 100f;
+    public float mouseSens = 500f;
 }

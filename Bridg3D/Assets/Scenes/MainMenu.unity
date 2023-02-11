@@ -1167,7 +1167,7 @@ MonoBehaviour:
   - actionName: Open Upgrade Menu
     button: 104
   - actionName: Cancel
-    button: 27
+    button: 112
   setAxes:
   - axisName: Vertical
     positiveButton: 119
@@ -2098,6 +2098,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 0}
+  playerController: {fileID: 0}
   audioManager: {fileID: 0}
 --- !u!4 &528845735
 Transform:
@@ -5186,7 +5187,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1000
   m_WholeNumbers: 0
-  m_Value: 100
+  m_Value: 500
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:

@@ -639,6 +639,12 @@ MonoBehaviour:
     m_Bits: 8
   coinValue: 5
   strategyLevel: 5
+  shieldTime: 0
+  enemyState: 0
+  retreatPoint: {fileID: 0}
+  hesitationTime: 0
+  hesitationTimer: 0
+  retreatTime: 0
 --- !u!114 &6318777163133523191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -677,6 +683,7 @@ MonoBehaviour:
   shieldAnimator: {fileID: 6318777162673424044}
   shieldStrength: 1
   shieldCooldown: 2.5
+  shieldTime: 0
 --- !u!114 &6318777163133523190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -739,22 +746,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99baa2f809365f74ba27101895a00b11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds:
+  currentSongName: 
+  soundTypes:
   - name: Attack
-    clip: {fileID: 8300000, guid: 3e593655fe312464485ef453b9f4625d, type: 3}
-    volume: 1
-    loop: 0
-    source: {fileID: 0}
+    sounds:
+    - clip: {fileID: 8300000, guid: 3e593655fe312464485ef453b9f4625d, type: 3}
+      volume: 1
+      loop: 0
+      source: {fileID: 0}
   - name: Hurt
-    clip: {fileID: 8300000, guid: 7caa6a5b28710aa4caa5a02f9562b200, type: 3}
-    volume: 1
-    loop: 0
-    source: {fileID: 0}
+    sounds:
+    - clip: {fileID: 8300000, guid: 7caa6a5b28710aa4caa5a02f9562b200, type: 3}
+      volume: 1
+      loop: 0
+      source: {fileID: 0}
   - name: Die
-    clip: {fileID: 8300000, guid: bc3550d21f08de849bd421b22b030a45, type: 3}
-    volume: 1
-    loop: 0
-    source: {fileID: 0}
+    sounds:
+    - clip: {fileID: 8300000, guid: bc3550d21f08de849bd421b22b030a45, type: 3}
+      volume: 1
+      loop: 0
+      source: {fileID: 0}
 --- !u!1001 &743788007219971643
 PrefabInstance:
   m_ObjectHideFlags: 0

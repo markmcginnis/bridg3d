@@ -1101,7 +1101,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2077442463}
   - component: {fileID: 2077442462}
-  - component: {fileID: 2077442461}
   m_Layer: 0
   m_Name: MenuManager
   m_TagString: Untagged
@@ -1109,18 +1108,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2077442461
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2077442460}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3e63ea370a5ec44692436a2ebba0c04, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2077442462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1134,6 +1121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 0}
+  playerController: {fileID: 0}
   audioManager: {fileID: 0}
 --- !u!4 &2077442463
 Transform:

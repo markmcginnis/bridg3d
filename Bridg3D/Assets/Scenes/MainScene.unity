@@ -6120,6 +6120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 1904191005}
+  playerController: {fileID: 0}
   audioManager: {fileID: 4471863107310714114}
 --- !u!4 &1396363259
 Transform:
@@ -6714,22 +6715,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentSongName: 
-  sounds:
-  - name: Hurt
-    clip: {fileID: 8300000, guid: 2e620d8c97d1cbb40added4a13d6fdd6, type: 3}
-    volume: 1
-    loop: 0
-    source: {fileID: 0}
-  - name: Die
-    clip: {fileID: 8300000, guid: 912ea7e8c1e824c4ea62c2d8d7a1041f, type: 3}
-    volume: 1
-    loop: 0
-    source: {fileID: 0}
+  soundTypes:
   - name: Market_Use
-    clip: {fileID: 8300000, guid: 77cd02c9ce8176d42af455e840346e0d, type: 3}
-    volume: 1
-    loop: 0
-    source: {fileID: 0}
+    sounds:
+    - clip: {fileID: 8300000, guid: 77cd02c9ce8176d42af455e840346e0d, type: 3}
+      volume: 1
+      loop: 0
+      source: {fileID: 0}
+  - name: Hurt
+    sounds:
+    - clip: {fileID: 8300000, guid: 2e620d8c97d1cbb40added4a13d6fdd6, type: 3}
+      volume: 1
+      loop: 0
+      source: {fileID: 0}
+  - name: Die
+    sounds:
+    - clip: {fileID: 8300000, guid: 912ea7e8c1e824c4ea62c2d8d7a1041f, type: 3}
+      volume: 1
+      loop: 0
+      source: {fileID: 0}
 --- !u!1 &1490475236
 GameObject:
   m_ObjectHideFlags: 0
@@ -10102,42 +10106,49 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentSongName: 
-  sounds:
+  soundTypes:
   - name: Attack
-    clip: {fileID: 8300000, guid: 6326f326531327f4b86854f7fc5cd4e6, type: 3}
-    volume: 1
-    loop: 0
-    source: {fileID: 0}
+    sounds:
+    - clip: {fileID: 8300000, guid: 6326f326531327f4b86854f7fc5cd4e6, type: 3}
+      volume: 1
+      loop: 0
+      source: {fileID: 0}
   - name: Hurt
-    clip: {fileID: 8300000, guid: 2e620d8c97d1cbb40added4a13d6fdd6, type: 3}
-    volume: 1
-    loop: 0
-    source: {fileID: 0}
+    sounds:
+    - clip: {fileID: 8300000, guid: 2e620d8c97d1cbb40added4a13d6fdd6, type: 3}
+      volume: 1
+      loop: 0
+      source: {fileID: 0}
   - name: Die
-    clip: {fileID: 8300000, guid: 912ea7e8c1e824c4ea62c2d8d7a1041f, type: 3}
-    volume: 1
-    loop: 0
-    source: {fileID: 0}
-  - name: Game_Over
-    clip: {fileID: 8300000, guid: 11273e3815e00cf409cf0e88c04959c4, type: 3}
-    volume: 1
-    loop: 0
-    source: {fileID: 0}
+    sounds:
+    - clip: {fileID: 8300000, guid: 912ea7e8c1e824c4ea62c2d8d7a1041f, type: 3}
+      volume: 1
+      loop: 0
+      source: {fileID: 0}
   - name: Mid-Wave Song
-    clip: {fileID: 8300000, guid: 4d9a246a520984e44a5ab32167dc10b9, type: 3}
-    volume: 0.25
-    loop: 1
-    source: {fileID: 0}
+    sounds:
+    - clip: {fileID: 8300000, guid: 4d9a246a520984e44a5ab32167dc10b9, type: 3}
+      volume: 1
+      loop: 1
+      source: {fileID: 0}
   - name: Post-Wave Song
-    clip: {fileID: 8300000, guid: 20513b0f22fb9254ebfae3a15a8e8951, type: 3}
-    volume: 0.5
-    loop: 0
-    source: {fileID: 0}
+    sounds:
+    - clip: {fileID: 8300000, guid: 20513b0f22fb9254ebfae3a15a8e8951, type: 3}
+      volume: 1
+      loop: 0
+      source: {fileID: 0}
   - name: Coin_Pickup
-    clip: {fileID: 8300000, guid: d8355214554001549b3a35182ae0c501, type: 3}
-    volume: 1
-    loop: 0
-    source: {fileID: 0}
+    sounds:
+    - clip: {fileID: 8300000, guid: d8355214554001549b3a35182ae0c501, type: 3}
+      volume: 1
+      loop: 0
+      source: {fileID: 0}
+  - name: Game_Over
+    sounds:
+    - clip: {fileID: 8300000, guid: 11273e3815e00cf409cf0e88c04959c4, type: 3}
+      volume: 1
+      loop: 0
+      source: {fileID: 0}
 --- !u!224 &6562734591365676540
 RectTransform:
   m_ObjectHideFlags: 0
