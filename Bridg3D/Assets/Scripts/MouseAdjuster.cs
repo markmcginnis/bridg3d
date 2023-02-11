@@ -1,13 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class MouseAdjuster : MonoBehaviour
+public static class MouseAdjuster// : MonoBehaviour
 {
-    // Update is called once per frame
-    void Update()
+    public static void SetState(CursorLockMode state)
     {
-        Debug.Log("MOUSE ADJUSTED");
-        Cursor.lockState = CursorLockMode.None;
+        if(Cursor.lockState == state){
+            return;
+        }
+        Cursor.lockState = state;
     }
 }

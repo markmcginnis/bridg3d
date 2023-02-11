@@ -101,8 +101,8 @@ public class MarketController : MonoBehaviour
         player.GetComponentInChildren<MouseLook>().enabled = false;
         player.GetComponent<FPSMovement>().enabled = false;
         upgradeMenu.UpdateMenu();
-        Cursor.lockState = CursorLockMode.Confined;
-        Cursor.visible = true;
+        // Cursor.lockState = CursorLockMode.Confined;
+        // Cursor.visible = true;
         return true;
     }
 
@@ -114,8 +114,8 @@ public class MarketController : MonoBehaviour
         upgradeMenuContainer.SetActive(false);
         player.GetComponentInChildren<MouseLook>().enabled = true;
         player.GetComponent<FPSMovement>().enabled = true;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        // Cursor.lockState = CursorLockMode.Locked;
+        // Cursor.visible = false;
     }
 
     //keep track of player being in range to buy stuff
@@ -134,7 +134,7 @@ public class MarketController : MonoBehaviour
             upgradeMenuContainer.SetActive(false);
             player.GetComponentInChildren<MouseLook>().enabled = true;
             player.GetComponent<FPSMovement>().enabled = true;
-            Cursor.lockState = CursorLockMode.Locked;
+            // Cursor.lockState = CursorLockMode.Locked;
         }
             
     }

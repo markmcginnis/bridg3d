@@ -12,9 +12,12 @@ public class HealthController : CustomComponent
     // Start is called before the first frame update
     void Start()
     {
+        SetMaxHealth();
         currentHealth = maxHealth;
         audioManager = GetComponent<AudioManager>();
     }
+
+    virtual public void SetMaxHealth(){}
 
     public void TakeDamage(float damage){
         //adjust damage for potential shield then take it

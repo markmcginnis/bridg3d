@@ -43,23 +43,26 @@ public class PlayerController : MonoBehaviour
         switch(currState){
             case GameState.PAUSE:
                 //if game is paused, only actions are to undo the pausing
-                Cursor.lockState = CursorLockMode.Confined;
-                if(input.GetButtonDown("Cancel") || !pauseMenuOpen){
+                // Cursor.lockState = CursorLockMode.Confined;
+                MouseAdjuster.SetState(CursorLockMode.Confined);
+                if(!pauseMenuOpen){ // removed input.GetButtonDown("Cancel") ||  from condition
                     pauseMenuOpen = false;
                     currState = returnState;
                 }
                 break;
             case GameState.KEYBINDS:
                 //if keybinds menu is open, only action is close keybind menu
-                Cursor.lockState = CursorLockMode.Confined;
-                if(input.GetButtonDown("Cancel")){
-                    input.CloseKeybindMenu();
-                    currState = GameState.PAUSE;
-                }
+                // Cursor.lockState = CursorLockMode.Confined;
+                MouseAdjuster.SetState(CursorLockMode.Confined);
+                // if(input.GetButtonDown("Cancel")){
+                //     input.CloseKeybindMenu();
+                //     currState = GameState.PAUSE;
+                // }
                 break;
             case GameState.UPGRADES:
                 //if player is using market, only actions are to close the market or pause the game
-                Cursor.lockState = CursorLockMode.Confined;
+                // Cursor.lockState = CursorLockMode.None;
+                MouseAdjuster.SetState(CursorLockMode.Confined);
                 if(input.GetButtonDown("Open Upgrade Menu") || !marketController.upgradeMenuOpen){
                     marketController.CloseUpgradeMenu();
                     currState = GameState.COMBAT;
@@ -71,7 +74,8 @@ public class PlayerController : MonoBehaviour
                 }
                 break;
             case GameState.COMBAT:
-            Cursor.lockState = CursorLockMode.Locked;
+                // Cursor.lockState = CursorLockMode.Locked;
+                MouseAdjuster.SetState(CursorLockMode.Locked);
                 //default state, accept all combat inputs or state changing inputs
                 if(input.GetButtonDown("Defend")){
                     defendController.ShieldUp();

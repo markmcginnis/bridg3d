@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
             playerHealthBar.Die();
             returnToMenuTime -= Time.deltaTime;
             if(returnToMenuTime <= 0){
-                Cursor.lockState = CursorLockMode.Confined;
+                // Cursor.lockState = CursorLockMode.Confined;
                 menuManager.LoadEndScene(false);
             }
         }
@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
             endGameText.text = "WIN!";
             returnToMenuTime -= Time.deltaTime;
             if(returnToMenuTime <= 0){
-                Cursor.lockState = CursorLockMode.Confined;
+                // Cursor.lockState = CursorLockMode.Confined;
                 menuManager.LoadEndScene(true);
             }
         }

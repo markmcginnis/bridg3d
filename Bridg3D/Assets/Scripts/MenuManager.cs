@@ -7,14 +7,15 @@ public class MenuManager : MonoBehaviour
 {
     public GameObject pauseMenuUI;
 
+    public PlayerController playerController;
     public AudioManager audioManager;
 
     void Start(){
-        Cursor.lockState = CursorLockMode.Confined;
-        PlayerController playerController = FindObjectOfType<PlayerController>();
+        // Cursor.lockState = CursorLockMode.Confined;
+        playerController = FindObjectOfType<PlayerController>();
         if(!playerController)
             return;
-        audioManager = playerController.GetComponent<AudioManager>();        
+        audioManager = playerController.GetComponent<AudioManager>();     
     }
 
     public void Play(){
@@ -38,15 +39,19 @@ public class MenuManager : MonoBehaviour
         // Debug.Log("pause");
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
-        Cursor.lockState = CursorLockMode.Confined;
+        // Cursor.lockState = CursorLockMode.None;
+        MouseAdjuster.SetState(CursorLockMode.Confined);
         audioManager.Pause(audioManager.currentSongName);
+        playerController.pauseMenuOpen = true;
     }
 
     public void Resume(){
         // Debug.Log("resume");
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
-        Cursor.lockState = CursorLockMode.Locked;
+        // Cursor.lockState = CursorLockMode.Locked;
+        MouseAdjuster.SetState(CursorLockMode.Locked);
         audioManager.Play(audioManager.currentSongName);
+        playerController.pauseMenuOpen = false;
     }
 }
