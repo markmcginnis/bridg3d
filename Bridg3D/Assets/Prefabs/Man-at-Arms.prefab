@@ -747,21 +747,83 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentSongName: 
   soundTypes:
-  - name: Attack
+  - name: Hurt
     sounds:
-    - clip: {fileID: 8300000, guid: 3e593655fe312464485ef453b9f4625d, type: 3}
+    - clip: {fileID: 8300000, guid: a2dd87c9450af864faa1c8ee2700a109, type: 3}
       volume: 1
       loop: 0
       source: {fileID: 0}
-  - name: Hurt
-    sounds:
-    - clip: {fileID: 8300000, guid: 7caa6a5b28710aa4caa5a02f9562b200, type: 3}
+    - clip: {fileID: 8300000, guid: 18829497d62c6ac4098bd6fabe9d9f75, type: 3}
+      volume: 1
+      loop: 0
+      source: {fileID: 0}
+    - clip: {fileID: 8300000, guid: ac19995cfb4a9af4db063e8be59fe4be, type: 3}
+      volume: 1
+      loop: 0
+      source: {fileID: 0}
+    - clip: {fileID: 8300000, guid: 51ca53423ed111a4ca08218542a76fd8, type: 3}
       volume: 1
       loop: 0
       source: {fileID: 0}
   - name: Die
     sounds:
-    - clip: {fileID: 8300000, guid: bc3550d21f08de849bd421b22b030a45, type: 3}
+    - clip: {fileID: 8300000, guid: 27f9c2c14fc9f2242b686d446f067678, type: 3}
+      volume: 1
+      loop: 0
+      source: {fileID: 0}
+    - clip: {fileID: 8300000, guid: b15242585d1ae5340ac2aa950ae698ab, type: 3}
+      volume: 1
+      loop: 0
+      source: {fileID: 0}
+    - clip: {fileID: 8300000, guid: 096979ad68eb6df4a988768dfe31b260, type: 3}
+      volume: 1
+      loop: 0
+      source: {fileID: 0}
+    - clip: {fileID: 8300000, guid: c2906fb51cd2e3f499519d937f1182c8, type: 3}
+      volume: 1
+      loop: 0
+      source: {fileID: 0}
+    - clip: {fileID: 8300000, guid: ffd8e5fac0ea57e40b467d737609617b, type: 3}
+      volume: 1
+      loop: 0
+      source: {fileID: 0}
+  - name: Attack
+    sounds:
+    - clip: {fileID: 8300000, guid: 53919514811c32142805174f4185b0a1, type: 3}
+      volume: 1
+      loop: 0
+      source: {fileID: 0}
+    - clip: {fileID: 8300000, guid: 7bc8b0a9bedb4924c8a736b38b0c9972, type: 3}
+      volume: 1
+      loop: 0
+      source: {fileID: 0}
+    - clip: {fileID: 8300000, guid: 4b19941269afe664ab13b7b862381cbf, type: 3}
+      volume: 1
+      loop: 0
+      source: {fileID: 0}
+    - clip: {fileID: 8300000, guid: 212380584258adc4b8778eb284e01102, type: 3}
+      volume: 1
+      loop: 0
+      source: {fileID: 0}
+    - clip: {fileID: 8300000, guid: 61eee451a373e7547aca3091e4b06f19, type: 3}
+      volume: 1
+      loop: 0
+      source: {fileID: 0}
+    - clip: {fileID: 8300000, guid: 31e79c6f079f0a8488ef98ebc993765a, type: 3}
+      volume: 1
+      loop: 0
+      source: {fileID: 0}
+  - name: ShieldHit
+    sounds:
+    - clip: {fileID: 8300000, guid: ea0d9c4e66fcfe64d8819e7fe7d5e725, type: 3}
+      volume: 1
+      loop: 0
+      source: {fileID: 0}
+    - clip: {fileID: 8300000, guid: 58fb60498216bc74badbbec41414a9ef, type: 3}
+      volume: 1
+      loop: 0
+      source: {fileID: 0}
+    - clip: {fileID: 8300000, guid: 8cb20463a7aba5b439e87c209efe1dd9, type: 3}
       volume: 1
       loop: 0
       source: {fileID: 0}

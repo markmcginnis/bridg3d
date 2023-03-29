@@ -40,6 +40,7 @@ public class SettingsManager : MonoBehaviour
             mouseSensSlider.onValueChanged.AddListener(delegate {ChangeMouseSens(mouseSensSlider.value);});
             Debug.Log("set mouse sens");
         }
+        Time.timeScale = 1f;
     }
 
     public void ChangeDifficulty(int newDifficulty){

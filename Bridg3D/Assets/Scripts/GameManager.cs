@@ -54,12 +54,12 @@ public class GameManager : MonoBehaviour
         attackCooldownSlider.value = Mathf.Clamp(1 - attackController.attackTime/attackController.attackCooldown,attackCooldownSlider.minValue,attackCooldownSlider.maxValue);
         if(playerHealthController.currentHealth <= 0){
             // Debug.Log("LOSE CONDITION");
-            endGameText.gameObject.SetActive(true);
+            // endGameText.gameObject.SetActive(true);
             if(!soundPlayed){
                 waveSpawner.audioManager.Play("Game_Over");
                 soundPlayed = true;
             }
-            endGameText.text = "LOSE!";
+            // endGameText.text = "LOSE!";
             playerHealthBar.Die();
             returnToMenuTime -= Time.deltaTime;
             if(returnToMenuTime <= 0){
@@ -69,8 +69,8 @@ public class GameManager : MonoBehaviour
         }
         if(!waveSpawner.enabled){
             // Debug.Log("WIN CONDITION");
-            endGameText.gameObject.SetActive(true);
-            endGameText.text = "WIN!";
+            // endGameText.gameObject.SetActive(true);
+            // endGameText.text = "WIN!";
             returnToMenuTime -= Time.deltaTime;
             if(returnToMenuTime <= 0){
                 // Cursor.lockState = CursorLockMode.Confined;

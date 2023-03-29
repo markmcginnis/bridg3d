@@ -27,7 +27,7 @@ public class AudioManager : MonoBehaviour
 
     public SoundType[] soundTypes;
 
-    void Awake()
+    void Start()
     {
         foreach(SoundType st in soundTypes)
         {

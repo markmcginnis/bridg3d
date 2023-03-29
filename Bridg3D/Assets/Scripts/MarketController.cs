@@ -56,7 +56,7 @@ public class MarketController : MonoBehaviour
             return;
         }
         playerWallet.DecreaseBalance(upgrade.cost);
-        audioManager.Play("Market_Use");
+        audioManager.Play("BuyUpgrade");
 
         //find the controller we mean to modify
         CustomComponent controller = (CustomComponent)player.GetComponent(System.Type.GetType(upgrade.controller));
@@ -90,7 +90,7 @@ public class MarketController : MonoBehaviour
         //take their money and heal them
         playerWallet.DecreaseBalance(healthCost);
         playerHealth.Heal(healthAmount);
-        audioManager.Play("Market_Use");
+        audioManager.Play("BuyHealth");
     }
 
     public bool OpenUpgradeMenu(){

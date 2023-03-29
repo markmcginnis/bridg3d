@@ -32,10 +32,16 @@ public class WaveSpawner : MonoBehaviour
     void Start()
     {
         waveCountdown = timeBetweenWaves;
-        audioManager.Play("Post-Wave Song");
+        // audioManager.Play("Post-Wave Song");
+        StartCoroutine("StartSong");
     }
 
-    
+    IEnumerator StartSong(){
+        yield return new WaitForSeconds(0.01f);
+        audioManager.Play("Post-Wave Song");
+        yield break;
+    }
+
     void Update()
     {
 

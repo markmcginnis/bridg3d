@@ -9,13 +9,14 @@ public class BossAbility : MonoBehaviour
     public Transform yeomanSpawn;
     public float timeBetweenAbility = 15f;
     public AbilityType abilityType;
-    public int healthAmount;
 
-    public EnemyHealthController enemyHealthController;
+    EnemyHealthController enemyHealthController;
+    AudioManager audioManager;
 
    void Start()
     {
         enemyHealthController = GetComponent<EnemyHealthController>();
+        audioManager = GetComponent<AudioManager>();
         StartCoroutine("AbilityTimer");
     }
 
@@ -27,12 +28,13 @@ public class BossAbility : MonoBehaviour
     void AbilityAction(){
         if(!enemyHealthController.enabled)
             return;
-        GetComponent<AudioManager>().Play("Boss Ability");
         switch(abilityType){
             case AbilityType.SPAWN:
+                audioManager.Play("BossAbilitySpawn");
                 Instantiate(yeoman, yeomanSpawn.position, yeomanSpawn.rotation);
                 break;
             case AbilityType.HEAL:
+                audioManager.Play("BossAbilityHeal");
                 enemyHealthController.currentHealth += (0.15f * enemyHealthController.maxHealth);
                 break;
             default:
