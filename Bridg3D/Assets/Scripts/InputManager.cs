@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class InputManager : MonoBehaviour
 {
@@ -31,6 +34,25 @@ public class InputManager : MonoBehaviour
 
     void Awake() {
         DontDestroyOnLoad(gameObject);
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    public void OnSceneLoaded(Scene scene, LoadSceneMode mode){
+        if(keybindMenuContainer){
+           return; 
+        }
+        GameObject tempKMC = Array.Find(Resources.FindObjectsOfTypeAll<GameObject>(), container => container.name == "KeybindMenuContainer");
+        if(tempKMC){
+            keybindMenuContainer = tempKMC;
+        }
+        Button tempButton = Array.Find(Resources.FindObjectsOfTypeAll<Button>(), button => button.name == "OpenKeybindMenu");
+        if(tempButton){
+            tempButton.onClick.AddListener(OpenKeybindMenu);
+        }
+        tempButton = Array.Find(Resources.FindObjectsOfTypeAll<Button>(), button => button.name == "CloseKeybindMenu");
+        if(tempButton){
+            tempButton.onClick.AddListener(CloseKeybindMenu);
+        }
     }
 
     void OnEnable(){
@@ -120,7 +142,7 @@ public class InputManager : MonoBehaviour
             player.GetComponentInChildren<MouseLook>().enabled = false;
             player.GetComponent<FPSMovement>().enabled = false;
         }
-        Cursor.lockState = CursorLockMode.None;
+        // Cursor.lockState = CursorLockMode.None;
     }
 
     public void CloseKeybindMenu(){
@@ -130,6 +152,6 @@ public class InputManager : MonoBehaviour
             player.GetComponentInChildren<MouseLook>().enabled = true;
             player.GetComponent<FPSMovement>().enabled = true;
         }
-        Cursor.lockState = CursorLockMode.Locked;
+        // Cursor.lockState = CursorLockMode.Locked;
     }
 }

@@ -56,7 +56,7 @@ public class MarketController : MonoBehaviour
             return;
         }
         playerWallet.DecreaseBalance(upgrade.cost);
-        audioManager.Play("Market_Use");
+        audioManager.Play("BuyUpgrade");
 
         //find the controller we mean to modify
         CustomComponent controller = (CustomComponent)player.GetComponent(System.Type.GetType(upgrade.controller));
@@ -90,7 +90,7 @@ public class MarketController : MonoBehaviour
         //take their money and heal them
         playerWallet.DecreaseBalance(healthCost);
         playerHealth.Heal(healthAmount);
-        audioManager.Play("Market_Use");
+        audioManager.Play("BuyHealth");
     }
 
     public bool OpenUpgradeMenu(){
@@ -101,8 +101,8 @@ public class MarketController : MonoBehaviour
         player.GetComponentInChildren<MouseLook>().enabled = false;
         player.GetComponent<FPSMovement>().enabled = false;
         upgradeMenu.UpdateMenu();
-        Cursor.lockState = CursorLockMode.Confined;
-        Cursor.visible = true;
+        // Cursor.lockState = CursorLockMode.Confined;
+        // Cursor.visible = true;
         return true;
     }
 
@@ -114,8 +114,8 @@ public class MarketController : MonoBehaviour
         upgradeMenuContainer.SetActive(false);
         player.GetComponentInChildren<MouseLook>().enabled = true;
         player.GetComponent<FPSMovement>().enabled = true;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        // Cursor.lockState = CursorLockMode.Locked;
+        // Cursor.visible = false;
     }
 
     //keep track of player being in range to buy stuff
@@ -134,7 +134,7 @@ public class MarketController : MonoBehaviour
             upgradeMenuContainer.SetActive(false);
             player.GetComponentInChildren<MouseLook>().enabled = true;
             player.GetComponent<FPSMovement>().enabled = true;
-            Cursor.lockState = CursorLockMode.Locked;
+            // Cursor.lockState = CursorLockMode.Locked;
         }
             
     }

@@ -10,7 +10,7 @@ public class DefendController : CustomComponent
     [Range(0f,1f)]
     public float shieldStrength = 1f;
     public float shieldCooldown = 2.5f;
-    float shieldTime;
+    public float shieldTime;
     HealthController healthController;
 
     void Start() {

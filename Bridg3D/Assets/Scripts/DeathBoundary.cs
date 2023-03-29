@@ -11,7 +11,7 @@ public class DeathBoundary : MonoBehaviour
             hc.Die();
         }
         yield return new WaitForSeconds(5f);
-        Destroy(other.gameObject);
+        // Destroy(other.gameObject);
     }
     
     void OnTriggerEnter(Collider other)

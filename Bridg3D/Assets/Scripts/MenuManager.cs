@@ -7,15 +7,28 @@ public class MenuManager : MonoBehaviour
 {
     public GameObject pauseMenuUI;
 
-    AudioManager audioManager;
+    public PlayerController playerController;
+    public AudioManager audioManager;
 
     void Start(){
-        Cursor.lockState = CursorLockMode.Confined;
-        audioManager = FindObjectOfType<AudioManager>();
+        // Cursor.lockState = CursorLockMode.Confined;
+        MouseAdjuster.SetState(CursorLockMode.Confined);
+        playerController = FindObjectOfType<PlayerController>();
+        if(!playerController)
+            return;
+        audioManager = playerController.GetComponent<AudioManager>();     
     }
 
     public void Play(){
         SceneManager.LoadScene("MainScene");
+    }
+
+    public void MainMenu(){
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void LoadEndScene(bool isVictory){
+        SceneManager.LoadScene((isVictory) ? "WinMenu" : "LossMenu");
     }
 
     public void Quit(){
@@ -24,18 +37,22 @@ public class MenuManager : MonoBehaviour
     }
 
     public void Pause(){
-        Debug.Log("pause");
+        // Debug.Log("pause");
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
-        Cursor.lockState = CursorLockMode.Confined;
+        // Cursor.lockState = CursorLockMode.None;
+        MouseAdjuster.SetState(CursorLockMode.Confined);
         audioManager.Pause(audioManager.currentSongName);
+        playerController.pauseMenuOpen = true;
     }
 
     public void Resume(){
-        Debug.Log("resume");
+        // Debug.Log("resume");
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
-        Cursor.lockState = CursorLockMode.Locked;
+        // Cursor.lockState = CursorLockMode.Locked;
+        MouseAdjuster.SetState(CursorLockMode.Locked);
         audioManager.Play(audioManager.currentSongName);
+        playerController.pauseMenuOpen = false;
     }
 }
