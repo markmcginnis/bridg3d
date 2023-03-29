@@ -1163,9 +1163,9 @@ MonoBehaviour:
   - actionName: Sprint
     button: 304
   - actionName: Buy Health
-    button: 98
-  - actionName: Open Upgrade Menu
     button: 104
+  - actionName: Open Upgrade Menu
+    button: 98
   - actionName: Cancel
     button: 112
   setAxes:

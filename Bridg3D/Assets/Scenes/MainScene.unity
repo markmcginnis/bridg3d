@@ -9500,111 +9500,111 @@ MonoBehaviour:
   - name: Max Health I
     controller: HealthController
     property: maxHealth
-    cost: 25
+    cost: 50
     impact: 10
     mathOperation: 0
     description: Max Health +10
   - name: Max Health II
     controller: HealthController
     property: maxHealth
-    cost: 25
+    cost: 50
     impact: 10
     mathOperation: 0
     description: Max Health +10
   - name: Max Health III
     controller: HealthController
     property: maxHealth
-    cost: 25
+    cost: 50
     impact: 10
     mathOperation: 0
     description: Max Health +10
   - name: Shield Cooldown I
     controller: DefendController
     property: shieldCooldown
-    cost: 25
+    cost: 50
     impact: 0.8
     mathOperation: 1
     description: Shield Cooldown -20%
   - name: Shield Cooldown II
     controller: DefendController
     property: shieldCooldown
-    cost: 25
+    cost: 50
     impact: 0.8
     mathOperation: 1
     description: Shield Cooldown -20%
   - name: Shield Cooldown III
     controller: DefendController
     property: shieldCooldown
-    cost: 25
+    cost: 50
     impact: 0.8
     mathOperation: 1
     description: Shield Cooldown -20%
   - name: Attack Speed I
     controller: AttackController
     property: attackCooldown
-    cost: 25
+    cost: 50
     impact: 0.9
     mathOperation: 1
     description: Attack Cooldown -10%
   - name: Attack Speed II
     controller: AttackController
     property: attackCooldown
-    cost: 25
+    cost: 50
     impact: 0.9
     mathOperation: 1
     description: Attack Cooldown -10%
   - name: Attack Speed III
     controller: AttackController
     property: attackCooldown
-    cost: 25
+    cost: 50
     impact: 0.9
     mathOperation: 1
     description: Attack Cooldown -10%
   - name: Damage I
     controller: AttackController
     property: damage
-    cost: 25
+    cost: 50
     impact: 5
     mathOperation: 0
     description: Attack Damage +5
   - name: Damage II
     controller: AttackController
     property: damage
-    cost: 25
+    cost: 50
     impact: 5
     mathOperation: 0
     description: Attack Damage +5
   - name: Damage III
     controller: AttackController
     property: damage
-    cost: 25
+    cost: 50
     impact: 5
     mathOperation: 0
     description: Attack Damage +5
   - name: Knockback I
     controller: AttackController
     property: knockbackForce
-    cost: 25
+    cost: 50
     impact: 1.15
     mathOperation: 1
     description: Knockback Force +15%
   - name: Knockback II
     controller: AttackController
     property: knockbackForce
-    cost: 25
+    cost: 50
     impact: 1.15
     mathOperation: 1
     description: Knockback Force +15%
   - name: Knockback III
     controller: AttackController
     property: knockbackForce
-    cost: 25
+    cost: 50
     impact: 1.15
     mathOperation: 1
     description: Knockback Force +15%
   inArea: 0
   player: {fileID: 1715840736}
-  healthCost: 10
+  healthCost: 25
   healthAmount: 10
 --- !u!65 &1471747357
 BoxCollider:
@@ -17616,6 +17616,10 @@ PrefabInstance:
     - target: {fileID: 4471863108950317588, guid: 3a889038e22d55249ba91261a4f75658, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4471863108950317589, guid: 3a889038e22d55249ba91261a4f75658, type: 3}
+      propertyPath: speed
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4471863108950317590, guid: 3a889038e22d55249ba91261a4f75658, type: 3}
       propertyPath: audioManager

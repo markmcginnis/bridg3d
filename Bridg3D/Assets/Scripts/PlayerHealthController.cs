@@ -17,4 +17,19 @@ public class PlayerHealthController : HealthController
         GetComponentInChildren<MouseLook>().enabled = false;
         //may need to add more like quick timer than go to lose menu or whatever else
     }
+
+    public override void TakeDamage(float damage)
+    {
+        base.TakeDamage(damage);
+        if(damageModifier == 0f)
+            return;
+        StartCoroutine(InvincibilityTimer(0.2f,damageModifier));
+    }
+
+    IEnumerator InvincibilityTimer(float time, float originalDamagerModifier){
+        damageModifier = 0f;
+        yield return new WaitForSeconds(time);
+        damageModifier = originalDamagerModifier;
+        yield return null;
+    }
 }

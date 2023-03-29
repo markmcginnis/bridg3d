@@ -678,7 +678,7 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 8
-  coinValue: 50
+  coinValue: 25
   strategyLevel: 5
   shieldTime: 0
   enemyState: 0
@@ -847,7 +847,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d58d96ff49fbaa441a33158e1f3c3a17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yeoman: {fileID: 6318777163133523184, guid: b0b788aaa9755b142b64ab37367a821d, type: 3}
+  yeoman: {fileID: 6318777163133523184, guid: 6061e9bf25dd8724c885edbfd4e2c40f, type: 3}
   yeomanSpawn: {fileID: 3954044158546503518}
   timeBetweenAbility: 15
   abilityType: 0

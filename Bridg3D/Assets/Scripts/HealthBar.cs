@@ -17,6 +17,10 @@ public class HealthBar : MonoBehaviour
         setHealth(maxHealth);
     }
 
+    void Update(){
+        slider.maxValue = GameObject.Find("Player").GetComponent<HealthController>().maxHealth;
+    }
+
     public void Die(){
         this.transform.Find("Heart").gameObject.SetActive(false);
         this.transform.Find("Skull").gameObject.SetActive(true);

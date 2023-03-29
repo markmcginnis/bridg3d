@@ -19,7 +19,7 @@ public class HealthController : CustomComponent
 
     virtual public void SetMaxHealth(){}
 
-    public void TakeDamage(float damage){
+    virtual public void TakeDamage(float damage){
         //adjust damage for potential shield then take it
         currentHealth -= damage * damageModifier;
         if(damageModifier == 0){
