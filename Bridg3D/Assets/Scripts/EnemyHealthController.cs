@@ -7,6 +7,8 @@ public class EnemyHealthController : HealthController
     [SerializeField]
     Coin coin;
     [SerializeField]
+    GameObject pill;
+    [SerializeField]
     Transform coinSpawnpoint;
 
     public override void SetMaxHealth()
@@ -42,6 +44,13 @@ public class EnemyHealthController : HealthController
         base.Die();
         coin.value = GetComponent<EnemyController>().coinValue;
         Instantiate(coin.gameObject, coinSpawnpoint.position, coinSpawnpoint.rotation);
+        int chance = Random.Range(0,(int)GetComponent<EnemyController>().strategyLevel);
+        Debug.Log(chance);
+        if(chance == 0){
+            Transform pillPoint = coinSpawnpoint;
+            pillPoint.position = new Vector3(pillPoint.position.x, pillPoint.position.y + 0.5f, pillPoint.position.z);
+            Instantiate(pill,coinSpawnpoint.position,new Quaternion());
+        }
         this.GetComponent<EnemyController>().enabled = false;
         Destroy(GetComponent<KnockbackController>());
         // this.GetComponent<CharacterController>().enabled = false;

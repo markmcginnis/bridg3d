@@ -15,6 +15,12 @@ public class MarketController : MonoBehaviour
         public enum MathOperation {PLUS, MULTIPLY};
         public MathOperation mathOperation;
         public string description;
+        public int currentTier;
+        public int totalTiers;
+        public bool ConsumeAndRemove(){
+            currentTier += 1;
+            return currentTier == totalTiers;
+        }
     }
 
     public GameObject upgradeMenuContainer;
@@ -73,7 +79,9 @@ public class MarketController : MonoBehaviour
         else{
             controller[upgrade.property] = (float)controller[upgrade.property] * upgrade.impact;
         }
-        upgrades.Remove(upgrade);
+        if(upgrade.ConsumeAndRemove()){
+            upgrades.Remove(upgrade);
+        }
         upgradeMenu.ResetMenu();
         upgradeMenu.UpdateMenu();
     }

@@ -653,6 +653,7 @@ MonoBehaviour:
   currentHealth: 0
   damageModifier: 1
   coin: {fileID: 612745386623840928, guid: 0ee039b0a22afd84882fe013b2cce73a, type: 3}
+  pill: {fileID: 612745386623840929, guid: 4a710c62c8a0c6a42b1f910e80d81494, type: 3}
   coinSpawnpoint: {fileID: 6318777162485336081}
 --- !u!114 &6318777163133523189
 MonoBehaviour:

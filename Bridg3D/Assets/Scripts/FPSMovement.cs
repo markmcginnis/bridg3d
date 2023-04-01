@@ -52,7 +52,6 @@ public class FPSMovement : MonoBehaviour
 
         //if trying to sprint
         if(input.GetButton("Sprint")){
-            Debug.Log("SPRINT");
             //make sure time is not negative and adjust as needed
             sprintTime = Mathf.Clamp(sprintTime - Time.deltaTime, 0, sprintCapacity);
             //if we have sprint time left
