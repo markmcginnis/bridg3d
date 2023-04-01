@@ -34,6 +34,8 @@ public class MarketController : MonoBehaviour
     float healthAmount = 10f;
 
     AudioManager audioManager;
+    
+    public GameObject rangeTooltip;
 
     public void BuyUpgrade(string upgradeID){
         //find upgrade based on "key" value
@@ -121,13 +123,16 @@ public class MarketController : MonoBehaviour
     //keep track of player being in range to buy stuff
     void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.Equals(player))
+        if(other.gameObject.Equals(player)){
             inArea = true;
+            rangeTooltip.SetActive(true);
+        }
     }
 
     void OnTriggerExit(Collider other)
     {
         if(other.gameObject.Equals(player)){
+            rangeTooltip.SetActive(false);
             Debug.Log("trigger exit");
             inArea = false;
             upgradeMenuOpen = false;

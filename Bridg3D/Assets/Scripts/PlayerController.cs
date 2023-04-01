@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
                 //if game is paused, only actions are to undo the pausing
                 // Cursor.lockState = CursorLockMode.Confined;
                 MouseAdjuster.SetState(CursorLockMode.Confined);
-                if(!pauseMenuOpen){ // removed input.GetButtonDown("Cancel") ||  from condition
+                if(!pauseMenuOpen){ // removed input.GetButtonDown("Pause") ||  from condition
                     pauseMenuOpen = false;
                     currState = returnState;
                 }
@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
                 //if keybinds menu is open, only action is close keybind menu
                 // Cursor.lockState = CursorLockMode.Confined;
                 MouseAdjuster.SetState(CursorLockMode.Confined);
-                // if(input.GetButtonDown("Cancel")){
+                // if(input.GetButtonDown("Pause")){
                 //     input.CloseKeybindMenu();
                 //     currState = GameState.PAUSE;
                 // }
@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour
                     marketController.CloseUpgradeMenu();
                     currState = GameState.COMBAT;
                 }
-                if(input.GetButtonDown("Cancel")){
+                if(input.GetButtonDown("Pause")){
                     pauseMenuOpen = true;
                     returnState = currState;
                     currState = GameState.PAUSE;
@@ -94,7 +94,7 @@ public class PlayerController : MonoBehaviour
                         currState = GameState.UPGRADES;
                     }
                 }
-                if(input.GetButtonDown("Cancel")){
+                if(input.GetButtonDown("Pause")){
                     pauseMenuOpen = true;
                     returnState = currState;
                     currState = GameState.PAUSE;

@@ -11,6 +11,7 @@ public class WaveSpawner : MonoBehaviour
         public Transform[] enemies;
         public int[] count;
         public float rate;
+        public bool bossWave;
     }
 
     public Transform[] spawnPoints;
@@ -67,6 +68,7 @@ public class WaveSpawner : MonoBehaviour
                 // GameObject.Find("BetweenWavesSong").GetComponent<AudioSource>().enabled = false;
                 // GameObject.Find("DuringWavesSong").GetComponent<AudioSource>().enabled = true;
                 StartCoroutine(spawnWave(waves[nextWave])); //spawn wave method
+                audioManager.Play("Charge");
                 audioManager.Stop("Post-Wave Song");
                 audioManager.Play("Mid-Wave Song");
             }
@@ -88,6 +90,9 @@ public class WaveSpawner : MonoBehaviour
                 spawnEnemy(_wave.enemies[i]); //spawn that number of enemies
                 yield return new WaitForSeconds(1/_wave.rate); //wait before spawning another
             }
+        }
+        if(_wave.bossWave){
+            audioManager.Play("BossIncoming");
         }
 
         state = SpawnState.WAITING;

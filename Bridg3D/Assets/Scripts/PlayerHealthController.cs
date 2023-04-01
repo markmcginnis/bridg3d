@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerHealthController : HealthController
 {
+    public GameObject damageIndicator;
+
     public override void Die()
     {
         //disable components to see outcome
@@ -28,6 +30,9 @@ public class PlayerHealthController : HealthController
 
     IEnumerator InvincibilityTimer(float time, float originalDamagerModifier){
         damageModifier = 0f;
+        damageIndicator.SetActive(true);
+        yield return new WaitForSeconds(0.05f);
+        damageIndicator.SetActive(false);
         yield return new WaitForSeconds(time);
         damageModifier = originalDamagerModifier;
         yield return null;

@@ -37,6 +37,10 @@ public class InputManager : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
+    public Dictionary<string, KeyCode> GetKeybindsDictionary(){
+        return keybinds;
+    }
+
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode){
         if(keybindMenuContainer){
            return; 
@@ -103,6 +107,14 @@ public class InputManager : MonoBehaviour
             return false;
         }
         return Input.GetKeyDown(keybinds[actionName]);
+    }
+    
+    public bool GetButton(string actionName){
+        if(!keybinds.ContainsKey(actionName)){
+            Debug.LogError("Action " + actionName + " not found!");
+            return false;
+        }
+        return Input.GetKey(keybinds[actionName]);
     }
 
     public bool GetButtonUp(string actionName){

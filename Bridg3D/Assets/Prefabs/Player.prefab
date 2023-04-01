@@ -577,8 +577,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   marketController: {fileID: 0}
-  acceptCombatInput: 1
-  acceptOtherInput: 1
+  pauseMenuOpen: 0
 --- !u!114 &4471863108950317589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -623,6 +622,8 @@ MonoBehaviour:
     m_Bits: 64
   wepAnimator: {fileID: 4471863107068410788}
   attackCooldown: 1.5
+  attackTime: 0
+  audioManager: {fileID: 0}
 --- !u!114 &4471863108950317591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -638,6 +639,7 @@ MonoBehaviour:
   shieldAnimator: {fileID: 4471863107270649805}
   shieldStrength: 1
   shieldCooldown: 2.5
+  shieldTime: 0
 --- !u!114 &4471863108950317595
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -52,7 +52,7 @@ public class MenuManager : MonoBehaviour
         Time.timeScale = 1f;
         // Cursor.lockState = CursorLockMode.Locked;
         MouseAdjuster.SetState(CursorLockMode.Locked);
-        audioManager.Play(audioManager.currentSongName);
+        audioManager.Resume(audioManager.currentSongName);
         playerController.pauseMenuOpen = false;
     }
 }
