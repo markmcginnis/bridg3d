@@ -55,7 +55,7 @@ public class EnemyHealthController : HealthController
         Destroy(GetComponent<KnockbackController>());
         // this.GetComponent<CharacterController>().enabled = false;
         Destroy(GetComponent<CharacterController>());
-        this.transform.Find("BodyPlaceholder").gameObject.AddComponent<Rigidbody>();
+        this.transform.Find("BodyPlaceholder").gameObject.AddComponent<Rigidbody>().mass = 0.1f;
         this.transform.Find("BodyPlaceholder").gameObject.AddComponent<CapsuleCollider>().gameObject.tag = "DeadEnemy";
         this.transform.Find("WeaponSlot").gameObject.SetActive(false);
         this.transform.Find("ShieldSlot+0.5").gameObject.SetActive(false);

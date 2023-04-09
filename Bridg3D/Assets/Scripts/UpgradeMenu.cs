@@ -23,7 +23,11 @@ public class UpgradeMenu : MonoBehaviour
             upgradeArea.transform.localScale = Vector3.one;
 
             TMP_Text upgradeNameText = upgradeArea.transform.Find("UpgradeName").GetComponent<TMP_Text>();
-            upgradeNameText.text = upgrade.name + " " + upgrade.currentTier;
+            string upgradeText = upgrade.name + " Tier ";
+            for(int j = 0; j < upgrade.currentTier; j++){
+                upgradeText += "I";
+            }
+            upgradeNameText.text = upgradeText;
 
             TMP_Text upgradeEffectText = upgradeArea.transform.Find("UpgradeEffect").GetComponent<TMP_Text>();
             upgradeEffectText.text = upgrade.description;

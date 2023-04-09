@@ -1329,7 +1329,7 @@ MonoBehaviour:
   - actionName: Open Upgrade Menu
     button: 98
   - actionName: Pause
-    button: 112
+    button: 27
   setAxes:
   - axisName: Vertical
     positiveButton: 119
