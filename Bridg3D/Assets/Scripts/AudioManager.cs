@@ -39,7 +39,8 @@ public class AudioManager : MonoBehaviour
             }
             
         }
-        ChangeVolume(SettingsManager.settings.audioVolume);
+        ChangeVolume(SettingsManager.settings.sfxVolume,true);
+        ChangeVolume(SettingsManager.settings.musicVolume,false);
     }
 
     public void Play(string name)
@@ -61,6 +62,25 @@ public class AudioManager : MonoBehaviour
         s.sounds[UnityEngine.Random.Range(0,s.sounds.Length)].source.Play();
     }
 
+    public void Resume(string name)
+    {
+        if(name == null || name == ""){
+            // Debug.Log((name == null) ? "name was null to play" : "name was empty to play");
+            return;
+        }
+        SoundType s = Array.Find(soundTypes, sound => sound.name == name);
+        if(s == null)
+        {
+            UnityEngine.Debug.LogError(name + " sound not found in Play");
+            return;
+        }
+        // Debug.Log("name to play: " + name + " - currentsongname: ~" + currentSongName + "~");
+        if(name.EndsWith("Song")){
+            currentSongName = name;
+        }
+        s.sounds[UnityEngine.Random.Range(0,s.sounds.Length)].source.UnPause();
+    }
+
     public void Pause(string name)
     {
         if(name == null || name == ""){
@@ -73,7 +93,7 @@ public class AudioManager : MonoBehaviour
             UnityEngine.Debug.LogError(name + " sound not found in Pause");
             return;
         }
-        // Debug.Log("name to pause: " + name + " - currentsongname: ~" + currentSongName + "~");
+        Debug.Log("name to pause: " + name + " - currentsongname: ~" + currentSongName + "~");
         if(name.EndsWith("Song")){
             currentSongName = name;
         }
@@ -93,10 +113,15 @@ public class AudioManager : MonoBehaviour
         s.sounds[UnityEngine.Random.Range(0,s.sounds.Length)].source.Stop();
     }
 
-    public void ChangeVolume(float newVolume){
+    public void ChangeVolume(float newVolume, bool isSFX){
         foreach(SoundType st in soundTypes){
             foreach(Sound s in st.sounds){
-                s.source.volume = newVolume;
+                if(isSFX && !st.name.EndsWith("Song")){
+                    s.source.volume = newVolume;
+                }
+                else if(!isSFX && st.name.EndsWith("Song")){
+                    s.source.volume = newVolume;
+                }
             }            
         }
     }

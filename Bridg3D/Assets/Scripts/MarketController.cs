@@ -15,6 +15,12 @@ public class MarketController : MonoBehaviour
         public enum MathOperation {PLUS, MULTIPLY};
         public MathOperation mathOperation;
         public string description;
+        public int currentTier;
+        public int totalTiers;
+        public bool ConsumeAndRemove(){
+            currentTier += 1;
+            return currentTier == totalTiers;
+        }
     }
 
     public GameObject upgradeMenuContainer;
@@ -34,6 +40,8 @@ public class MarketController : MonoBehaviour
     float healthAmount = 10f;
 
     AudioManager audioManager;
+    
+    public GameObject rangeTooltip;
 
     public void BuyUpgrade(string upgradeID){
         //find upgrade based on "key" value
@@ -71,7 +79,9 @@ public class MarketController : MonoBehaviour
         else{
             controller[upgrade.property] = (float)controller[upgrade.property] * upgrade.impact;
         }
-        upgrades.Remove(upgrade);
+        if(upgrade.ConsumeAndRemove()){
+            upgrades.Remove(upgrade);
+        }
         upgradeMenu.ResetMenu();
         upgradeMenu.UpdateMenu();
     }
@@ -121,13 +131,16 @@ public class MarketController : MonoBehaviour
     //keep track of player being in range to buy stuff
     void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.Equals(player))
+        if(other.gameObject.Equals(player)){
             inArea = true;
+            rangeTooltip.SetActive(true);
+        }
     }
 
     void OnTriggerExit(Collider other)
     {
         if(other.gameObject.Equals(player)){
+            rangeTooltip.SetActive(false);
             Debug.Log("trigger exit");
             inArea = false;
             upgradeMenuOpen = false;

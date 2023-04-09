@@ -32,7 +32,7 @@ public class EnemyController : MonoBehaviour
 
     public float coinValue = 1;
 
-    float attackRange;
+    public float attackRange;
 
     public float strategyLevel = 5f;
     float currHealth;
@@ -58,7 +58,8 @@ public class EnemyController : MonoBehaviour
         healthController = GetComponent<HealthController>();
         controller = GetComponent<CharacterController>();
         initialRotation = Quaternion.Euler(new Vector3(transform.localRotation.eulerAngles.x, transform.localRotation.eulerAngles.y, transform.localRotation.eulerAngles.z));
-        attackRange = attackController.attackRadius;
+        // attackRange = attackController.attackRadius;
+        attackRange = 4.5f;
         currHealth = healthController.currentHealth;
         enemyState = EnemyState.CHARGE;
         hesitationTimer = Random.Range(0.5f,strategyLevel);

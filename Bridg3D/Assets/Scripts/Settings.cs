@@ -8,7 +8,9 @@ public enum Difficulty {EASY, MEDIUM, HARD};
 
     public Difficulty difficulty = Difficulty.MEDIUM;
 
-    public float audioVolume = 1f;
+    public float sfxVolume = 1f;
+
+    public float musicVolume = 0.2f;
 
     public float mouseSens = 500f;
 }

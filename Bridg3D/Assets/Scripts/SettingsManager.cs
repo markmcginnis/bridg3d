@@ -17,8 +17,18 @@ public class SettingsManager : MonoBehaviour
     }
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode){
-        if(scene.name == "MainMenu")
+        if(scene.name == "MainMenu"){
+            GameObject.Find("TitleSong").GetComponent<AudioSource>().volume = settings.musicVolume;
             return;
+        }
+        if(scene.name == "WinMenu"){
+            GameObject.Find("WinSong").GetComponent<AudioSource>().volume = settings.musicVolume;
+            return;
+        }
+        if(scene.name == "LossMenu"){
+            GameObject.Find("LossSong").GetComponent<AudioSource>().volume = settings.musicVolume;
+            return;
+        }
         Debug.Log("setting menu values");
         GameObject[] gameObjects = Resources.FindObjectsOfTypeAll<GameObject>();
         
@@ -28,10 +38,16 @@ public class SettingsManager : MonoBehaviour
             difficultySelector.onValueChanged.AddListener(delegate {ChangeDifficulty(difficultySelector.value);});
             Debug.Log("set difficulty");
         }
-        Slider volumeSlider = Array.Find(Resources.FindObjectsOfTypeAll<Slider>(), slider => slider.name == "VolumeSlider");
-        if(volumeSlider){
-            volumeSlider.value = settings.audioVolume;
-            volumeSlider.onValueChanged.AddListener(delegate {ChangeVolume(volumeSlider.value);});
+        Slider sfxVolumeSlider = Array.Find(Resources.FindObjectsOfTypeAll<Slider>(), slider => slider.name == "SFXVolumeSlider");
+        if(sfxVolumeSlider){
+            sfxVolumeSlider.value = settings.sfxVolume;
+            sfxVolumeSlider.onValueChanged.AddListener(delegate {ChangeSFXVolume(sfxVolumeSlider.value);});
+            Debug.Log("set volume");
+        }
+        Slider musicVolumeSlider = Array.Find(Resources.FindObjectsOfTypeAll<Slider>(), slider => slider.name == "MusicVolumeSlider");
+        if(musicVolumeSlider){
+            musicVolumeSlider.value = settings.musicVolume;
+            musicVolumeSlider.onValueChanged.AddListener(delegate {ChangeMusicVolume(musicVolumeSlider.value);});
             Debug.Log("set volume");
         }
         Slider mouseSensSlider = Array.Find(Resources.FindObjectsOfTypeAll<Slider>(), slider => slider.name == "MouseSensSlider");
@@ -47,12 +63,24 @@ public class SettingsManager : MonoBehaviour
         settings.difficulty = (Settings.Difficulty)newDifficulty;
     }
 
-    public void ChangeVolume(float newVolume){
-        settings.audioVolume = newVolume;
+    public void ChangeSFXVolume(float newVolume){
+        settings.sfxVolume = newVolume;
         AudioManager[] audioManagers = FindObjectsOfType<AudioManager>();
         foreach(AudioManager audioManager in audioManagers){
-            audioManager.ChangeVolume(settings.audioVolume);
+            audioManager.ChangeVolume(settings.sfxVolume,true);
         }
+    }
+
+    public void ChangeMusicVolume(float newVolume){
+        settings.musicVolume = newVolume;
+        AudioManager[] audioManagers = FindObjectsOfType<AudioManager>();
+        foreach(AudioManager audioManager in audioManagers){
+            audioManager.ChangeVolume(settings.musicVolume,false);
+        }
+    }
+
+    public void ChangeTitleSongVolume(float newVolume){
+        GameObject.Find("TitleSong").GetComponent<AudioSource>().volume = newVolume;
     }
 
     public void ChangeMouseSens(float newSens){

@@ -51,7 +51,7 @@ public class FPSMovement : MonoBehaviour
         float speedModifier = 1f;
 
         //if trying to sprint
-        if(input.GetButtonDown("Sprint")){
+        if(input.GetButton("Sprint")){
             //make sure time is not negative and adjust as needed
             sprintTime = Mathf.Clamp(sprintTime - Time.deltaTime, 0, sprintCapacity);
             //if we have sprint time left
