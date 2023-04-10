@@ -42,6 +42,7 @@ public class MarketController : MonoBehaviour
     AudioManager audioManager;
     
     public GameObject rangeTooltip;
+    public GameObject rangeTooltip2;
 
     public void BuyUpgrade(string upgradeID){
         //find upgrade based on "key" value
@@ -134,6 +135,7 @@ public class MarketController : MonoBehaviour
         if(other.gameObject.Equals(player)){
             inArea = true;
             rangeTooltip.SetActive(true);
+            rangeTooltip2.SetActive(true);
         }
     }
 
@@ -141,6 +143,7 @@ public class MarketController : MonoBehaviour
     {
         if(other.gameObject.Equals(player)){
             rangeTooltip.SetActive(false);
+            rangeTooltip2.SetActive(false);
             Debug.Log("trigger exit");
             inArea = false;
             upgradeMenuOpen = false;

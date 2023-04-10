@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FPSMovement : MonoBehaviour
+public class FPSMovement : CustomComponent
 {
     public CharacterController controller;
 
@@ -12,8 +12,10 @@ public class FPSMovement : MonoBehaviour
     public float sprintModifier = 1.5f;
     public float sprintCapacity = 5f;
 
-    float sprintTime;
+    public float sprintTime;
     public float jumpHeight = 5f;
+
+    public float sprintRecharge = 1f;
 
     public Transform groundCheck;
     public float groundDist = 0.5f;
@@ -63,7 +65,7 @@ public class FPSMovement : MonoBehaviour
         //not trying to sprint
         else{
             //regenerate sprint time but don't go over capacity
-            sprintTime = Mathf.Clamp(sprintTime + Time.deltaTime, 0, sprintCapacity);
+            sprintTime = Mathf.Clamp(sprintTime + Time.deltaTime * sprintRecharge, 0, sprintCapacity);
         }
 
         //use character controller to move according to speed and adjust for framerate

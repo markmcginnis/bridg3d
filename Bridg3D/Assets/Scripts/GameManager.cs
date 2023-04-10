@@ -14,7 +14,12 @@ public class GameManager : MonoBehaviour
     public TMP_Text enemyCountText;
     public TMP_Text walletText;
 
+    public TMP_Text nextWaveTimerText;
+
     public Slider attackCooldownSlider;
+
+    public Slider sprintStaminaSlider;
+    public FPSMovement movementController;
 
     public TMP_Text endGameText;
 
@@ -43,6 +48,8 @@ public class GameManager : MonoBehaviour
         marketHealthBar.setMaxHealth(marketHealthController.maxHealth);
         attackCooldownSlider.minValue = 0f;
         attackCooldownSlider.maxValue = attackController.attackCooldown;
+        sprintStaminaSlider.minValue = 0f;
+        sprintStaminaSlider.maxValue = movementController.sprintCapacity;
     }
 
     // Update is called once per frame
@@ -52,6 +59,8 @@ public class GameManager : MonoBehaviour
         marketHealthBar.setHealth(marketHealthController.currentHealth);
         attackCooldownSlider.maxValue = attackController.attackCooldown;
         attackCooldownSlider.value = Mathf.Clamp(1 - attackController.attackTime/attackController.attackCooldown,attackCooldownSlider.minValue,attackCooldownSlider.maxValue);
+        sprintStaminaSlider.maxValue = movementController.sprintCapacity;
+        sprintStaminaSlider.value = Mathf.Clamp(movementController.sprintTime,sprintStaminaSlider.minValue,sprintStaminaSlider.maxValue);
         if(playerHealthController.currentHealth <= 0){
             // Debug.Log("LOSE CONDITION");
             // endGameText.gameObject.SetActive(true);
@@ -92,6 +101,7 @@ public class GameManager : MonoBehaviour
         UpdateWaveText(waveSpawner.nextWave+1);
         UpdateEnemyCountText(GameObject.FindGameObjectsWithTag("Enemy").Length);
         UpdateWalletText(wallet.GetBalance());
+        UpdateNextWaveTimerText(waveSpawner.waveCountdown);
     }
 
     void UpdateWaveText(int waveNum){
@@ -104,5 +114,9 @@ public class GameManager : MonoBehaviour
 
     void UpdateWalletText(float balance){
         walletText.text = "Coins: " + ((int)balance).ToString();
+    }
+
+    void UpdateNextWaveTimerText(float time){
+        nextWaveTimerText.text = "Next Wave in " + ((int)time).ToString() + " Seconds";
     }
 }
